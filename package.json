@@ -46,5 +46,10 @@
     "rules": {
       "vue/multi-word-component-names": "off"
     }
-  }
+  },
+  "browserslist": [
+    "> 1%",
+    "not dead",
+    "not ie 11"
+  ]
 }
