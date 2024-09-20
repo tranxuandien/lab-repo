@@ -49,7 +49,7 @@
   },
   "browserslist": [
     "> 1%",
-    "not dead",
-    "not ie 11"
+    "last 2 versions",
+    "not dead"
   ]
 }
