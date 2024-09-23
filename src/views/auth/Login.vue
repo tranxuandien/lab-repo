@@ -33,6 +33,7 @@
 // import { API_PATH } from '@/router/apiPath';
 // import Router from '@/router';
 // import { toast } from 'vue3-toastify';
+import Router from '@/router';
 import { useAuthStore } from '@/stores/auth'
 
 export default {
@@ -81,6 +82,12 @@ export default {
         //     form$.submitting = false
         // }
         // }
+    },
+    onMounted() {
+        const { returnUrl, isLogin } = useAuthStore();
+        if (isLogin()) {
+            Router.push(returnUrl)
+        }
     }
 }
 </script>

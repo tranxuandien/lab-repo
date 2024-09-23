@@ -69,12 +69,12 @@ function handleResponseError(error) {
     toast.error(error.response.data.errorMessage, {
         position: toast.POSITION.TOP_CENTER,
     });
-    // const { user, logout } = useAuthStore();
+    const { user, logout } = useAuthStore();
     // console.log(user)
-    // if ([401, 403].includes(error.status) && user) {
+    if ([401, 403].includes(error.status) && user) {
     // auto logout if 401 Unauthorized or 403 Forbidden response returned from api
-    //logout();
-    // }
+    logout();
+    }
 
     // get error message from body or default to response status
     // const error = (data && data.message) || res.status;

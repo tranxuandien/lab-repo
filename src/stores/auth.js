@@ -31,9 +31,10 @@ export const useAuthStore = defineStore({
             }
         },
         logout() {
+            //set expired
+            axiosWrapper.get('api/auth/logout?token='+this.user?.data?.token);
             this.user = null;
             localStorage.removeItem('user');
-            //TODO set expired
             Router.push('/auth/login');
         },
         hasRoleAdmin() {

@@ -6,6 +6,7 @@ import userRouter from './user'
 import Login from '@/views/auth/Login.vue'
 import Layout from '@/views/auth/Layout.vue'
 import { useAuthStore } from '@/stores/auth';
+import PageNotFound from '@/views/PageNotFound.vue'
 
 const Router = createRouter({
   history: createWebHistory(),
@@ -42,6 +43,11 @@ const Router = createRouter({
       path: '/about',
       name: 'About',
       component: About
+    },
+    {
+      path: "/:pathMatch(.*)*",
+      name: 'PageNotFound',
+      component: PageNotFound
     }
   ]
 })
