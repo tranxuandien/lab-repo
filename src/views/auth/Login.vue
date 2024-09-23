@@ -36,6 +36,8 @@
 import Router from '@/router';
 import { useAuthStore } from '@/stores/auth'
 
+
+
 export default {
     data() {
         return {
@@ -47,47 +49,21 @@ export default {
     methods: {
         async login(form$) {
             const data = form$.data
-            // form$.submitting = true
-            // form$.cancelToken = form$.$vueform.services.axios.CancelToken.source()
-            // const url = form$.$vueform.services.axios.defaults.baseURL + "api/auth/login";
-            // form$.$vueform.services.axios.defaults.headers.Authorization = null;
-            // console.log(url);
+            form$.submitting = true
             const authStore = useAuthStore();
-            await authStore.login(data.username, data.password);
+            await authStore.login(data.username, data.password).finally(() => {
+                form$.submitting = false
+            });
+        },
+        checkLogin() {
+            const authStore = useAuthStore();
+            if (authStore.isLogIn()) {
+                Router.push(authStore.returnUrl)
+            }
         }
-        // try {
-        //     await form$.$vueform.services.axios.post(url,
-        //         data,
-        //         {
-        //             cancelToken: form$.cancelToken.token,
-        //         }
-        //     ).then(res => {
-        //         console.log("========")
-        //         console.log(res.data.response.data)
-        //         if (!res.data.errorMessage) {
-
-        //             toast.success("Đăng nhập thành công", {
-        //                 position: toast.POSITION.TOP_CENTER,
-        //             });
-        //             //redirect user page
-        //             Router.push()
-        //         }
-
-        //     })
-        // } catch (error) {
-        //     toast.error(error.response.data.errorMessage, {
-        //         position: toast.POSITION.TOP_CENTER,
-        //     });
-        // } finally {
-        //     form$.submitting = false
-        // }
-        // }
     },
-    onMounted() {
-        const { returnUrl, isLogin } = useAuthStore();
-        if (isLogin()) {
-            Router.push(returnUrl)
-        }
+    mounted() {
+        this.checkLogin()
     }
 }
 </script>
