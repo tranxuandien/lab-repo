@@ -1,6 +1,6 @@
 <template>
     <Vueform :endpoint="false" @submit="submitForm" name="registerForm">
-        {{ errorMessage }}
+        <!-- {{ errorMessage }} -->
         <GroupElement name="chemicalInformation" label="Thông tin cơ bản">
             <TextElement name="name" rules="required" :messages="{ required: 'Nhập tên hóa chất' }"
                 placeholder="Tên hóa chất" :columns="6" />
@@ -67,6 +67,7 @@
 </template>
 <script>
 import { axiosWrapper } from '@/plugin/axiosWrapper';
+import { API_PATH } from '@/router/apiPath';
 // import { toast } from 'vue3-toastify';
 // import { Validator } from '@vueform/vueform'
 
@@ -104,11 +105,11 @@ export default {
     },
     methods: {
         async getAllBrand() {
-            this.brandList = await axiosWrapper.get('api/v1/brand');
+            this.brandList = await axiosWrapper.get(API_PATH.BRAND);
         }
         ,
         async getAllPosition() {
-            this.positionLst = await axiosWrapper.get('api/v1/position');
+            this.positionLst = await axiosWrapper.get(API_PATH.POSITION);
         },
         async submitForm(form$) {
             const data = form$.data
@@ -117,7 +118,8 @@ export default {
                 data.chemicalClassInfo = data.chemicalClassInfo1;
             }
             try {
-                const check = await axiosWrapper.post('api/v1/chemical/add', data).finally(() => {
+                
+                const check = await axiosWrapper.post(API_PATH.CHEMICAL.ADD, data).finally(() => {
                     console.log("======")
                     form$.submitting = false;
                 });
@@ -133,6 +135,7 @@ export default {
         }
     },
     mounted() {
+        console.log(API_PATH.CHEMICAL_ADD);
         this.getAllBrand()
         this.getAllPosition()
     }

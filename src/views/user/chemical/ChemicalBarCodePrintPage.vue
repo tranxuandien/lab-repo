@@ -20,6 +20,7 @@
 <script>
 import ChemicalSelectBox from '@/components/chemical/ChemicalSelectBox.vue'
 import { axiosWrapper } from '@/plugin/axiosWrapper';
+import { API_PATH } from '@/router/apiPath';
 
 export default {
     components: {
@@ -29,7 +30,7 @@ export default {
         async print(form$) {
             const data = form$.data
             form$.submitting = true
-            await axiosWrapper.get('api/v1/admin/chemical/codeprint?chemicalName=' + data.chemical.chemicalName + '&chemicalId=' + data.chemical.id + '&number=' + data.printNumber, null, true)
+            await axiosWrapper.get(API_PATH.CHEMICAL.PRINT + '?chemicalName=' + data.chemical.chemicalName + '&chemicalId=' + data.chemical.id + '&number=' + data.printNumber, null, true)
                 .finally(() => {
                     form$.submitting = false
                 })

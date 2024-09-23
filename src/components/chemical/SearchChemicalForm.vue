@@ -28,6 +28,7 @@
 // import { toast } from 'vue3-toastify';
 import ChemicalSelectBox from '@/components/chemical/ChemicalSelectBox.vue'
 import { axiosWrapper } from '@/plugin/axiosWrapper';
+import { API_PATH } from '@/router/apiPath';
 
 export default {
     components: {
@@ -51,16 +52,16 @@ export default {
     },
     methods: {
         async getAllBrand() {
-            this.brandList = await axiosWrapper.get('api/v1/brand');
+            this.brandList = await axiosWrapper.get(API_PATH.BRAND);
         }
         ,
         async getAllPosition() {
-            this.positionLst = await axiosWrapper.get('api/v1/position');
+            this.positionLst = await axiosWrapper.get(API_PATH.POSITION);
         },
         async doSearch(form$) {
             const data = form$.data;
             form$.submitting = true;
-            const result = await axiosWrapper.post('api/v1/chemical/list', data).finally(()=>{
+            const result = await axiosWrapper.post(API_PATH.CHEMICAL.LIST, data).finally(()=>{
                 form$.submitting = false;
             })
             this.$emit('getData', result.data);

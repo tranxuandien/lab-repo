@@ -4,6 +4,7 @@
 </template>
 <script>
 import { axiosWrapper } from '@/plugin/axiosWrapper'
+import { API_PATH } from '@/router/apiPath';
 
 
 export default {
@@ -19,7 +20,7 @@ export default {
     },
     methods: {
         async getAllChemical() {
-            this.chemicalList = await axiosWrapper.get('api/v1/chemical/list/master');
+            this.chemicalList = await axiosWrapper.get(API_PATH.CHEMICAL.LIST_MASTER);
         },
     },
     mounted() {

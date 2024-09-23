@@ -26,7 +26,7 @@ function request(method) {
             requestOptions.headers['Content-Type'] = 'application/json';
             requestOptions.data = JSON.stringify(data);
         }
-        console.log(requestOptions);
+        // console.log(requestOptions);
         if (isDownloadFile) {
             requestOptions.responseType = 'blob'
             return await fetch(url, requestOptions).then((res) => {
@@ -45,7 +45,7 @@ function authHeader(url) {
     const { user } = useAuthStore();
     const isLoggedIn = !!user?.data.token;
     const isApiUrl = url.includes('/api/v');
-    console.log("check header" + isApiUrl + isLoggedIn)
+    // console.log("check header" + isApiUrl + isLoggedIn)
     if (isLoggedIn && isApiUrl) {
         return { Authorization: `Bearer ${user.data.token}` };
     } else {

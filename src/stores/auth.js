@@ -3,6 +3,7 @@ import { defineStore } from 'pinia';
 import { axiosWrapper } from '@/plugin/axiosWrapper';
 import Router from '@/router/index';
 import { useAlertStore } from '@/stores/alert';
+import { API_PATH } from '@/router/apiPath';
 
 export const useAuthStore = defineStore({
     id: 'auth',
@@ -14,7 +15,7 @@ export const useAuthStore = defineStore({
     actions: {
         async login(username, password) {
             try {
-                const user = await axiosWrapper.post('api/auth/login', { username, password });
+                const user = await axiosWrapper.post(API_PATH.AUTH.LOGIN, { username, password });
 
                 // update pinia state
                 this.user = user;
@@ -32,7 +33,7 @@ export const useAuthStore = defineStore({
         },
         logout() {
             //set expired
-            axiosWrapper.get('api/auth/logout?token='+this.user?.data?.token);
+            axiosWrapper.get(API_PATH.AUTH.LOGOUT+'?token='+this.user?.data?.token);
             this.user = null;
             localStorage.removeItem('user');
             Router.push('/auth/login');

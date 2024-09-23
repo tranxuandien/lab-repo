@@ -53,6 +53,7 @@
 </template>
 <script>
 import { axiosWrapper } from '@/plugin/axiosWrapper';
+import { API_PATH } from '@/router/apiPath';
 import { toast } from 'vue3-toastify';
 
 export default {
@@ -66,7 +67,7 @@ export default {
       if (n.length == 10)//check barcode length
       {
         try {
-          this.chemical = await axiosWrapper.get("api/v1/admin/chemical/register?barcode=" + n);
+          this.chemical = await axiosWrapper.get(API_PATH.CHEMICAL.REGISTER+"?barcode=" + n);
         } catch (error) {
           console.error('There was a problem with the axios request:', error);
         }
@@ -75,7 +76,7 @@ export default {
     }
     ,
     async chemicalImport() {
-      const res = await axiosWrapper.get("api/v1/admin/chemical/import?barcode=" + this.$refs.form$.data.barcode);
+      const res = await axiosWrapper.get(API_PATH.CHEMICAL.IMPORT+"?barcode=" + this.$refs.form$.data.barcode);
       this.chemical = res.data;
       this.$refs.form$.update({ // updates form data
         barcode: '',
