@@ -1,17 +1,17 @@
 <template>
     <Vueform :endpoint="false" @submit="submitForm" name="registerForm">
-        <!-- {{ errorMessage }} -->
         <GroupElement name="chemicalInformation" label="Thông tin cơ bản">
             <TextElement name="name" rules="required" :messages="{ required: 'Nhập tên hóa chất' }"
                 placeholder="Tên hóa chất" :columns="6" />
             <SelectElement :search="true" label-prop="name" value-prop="id" name="brand" :native="true"
-                :items="brandList" placeholder="Nơi sản xuất" :columns="3" />
+                :items="brandList" placeholder="Nơi sản xuất" :columns="3" rules="required"
+                :messages="{ required: 'Chọn nơi sản xuất' }" />
         </GroupElement>
         <GroupElement name="chemicalDescription" label="Mô tả hóa chất">
             <SelectElement :search="true" name="chemicalType" :native="false" :items="['Dung dịch', 'Bột']" :columns="2"
-                placeholder="Loại hóa chất" />
+                placeholder="Loại hóa chất" rules="required" :messages="{ required: 'Chọn loại hóa chất' }" />
             <SelectElement :search="true" name="chemicalTypeInfo" :native="false" :items="['Lọ', 'Gói']" :columns="2"
-                placeholder="Đóng gói" />
+                placeholder="Đóng gói" rules="required" :messages="{ required: 'Chọn cách đóng gói' }" />
             <TextElement rules="required" :messages="{ required: 'Nhập khối lượng hóa chất' }"
                 name="manufactoryQuantity" placeholder="K/lượng,Thể tích" :columns="2" :mask="{
                     mask: 'number',
@@ -27,7 +27,8 @@
                 }" />
 
             <TextElement name="otherInfo" :native="false" :columns="2" placeholder="Mô tả khác" />
-            <DateElement name="expiredDate" :columns="1" placeholder="Hạn sử dụng" />
+            <DateElement name="expiredDate" :columns="1" placeholder="Hạn sử dụng" rules="required"
+                :messages="{ required: 'Chọn hạn sử dụng' }" />
         </GroupElement>
         <GroupElement name="chemicalClassGroup" label="Phân loại hóa chất">
             <SelectElement :search="true" name="chemicalClass" :native="false"
@@ -51,12 +52,13 @@
                     ]
                 ]" />
         </GroupElement>
-        <GroupElement name="ImportUser" label="Người nhập hóa chất">
-            <TextElement name="registerUser" :columns="2" />
-        </GroupElement>
+        <!-- <GroupElement name="ImportUser" label="Người nhập hóa chất"> -->
+            <TextElement name="registerUser" :columns="2" hidden="true"/>
+        <!-- </GroupElement> -->
         <GroupElement name="chemicalImportDescription" label="Thông tin nhập hóa chất">
             <SelectElement :search="true" name="position" label-prop="positionInfo" value-prop="id" :items="positionLst"
-                placeholder="Vị trí đặt hóa chất" :columns="2" />
+                placeholder="Vị trí đặt hóa chất" :columns="2" rules="required"
+                :messages="{ required: 'Chọn vị trí đặt hóa chất' }"/>
             <TextElement name="chemicalStatus" placeholder="Tình trạng hóa chất" :columns="2" />
             <TextElement name="purchaseSrc" placeholder="Nguồn" :columns="2" />
         </GroupElement>
@@ -68,23 +70,11 @@
 <script>
 import { axiosWrapper } from '@/plugin/axiosWrapper';
 import { API_PATH } from '@/router/apiPath';
-// import { toast } from 'vue3-toastify';
-// import { Validator } from '@vueform/vueform'
-
-// const abc = class extends Validator {
-//     check(value) {
-//         return /^[A-Z]*$/.test(value);
-//     }
-//     get msg() {
-//         return 'abc'
-//     }
-// }
-
+import { useAuthStore } from '@/stores/auth';
 
 export default {
     data() {
         return {
-            // abc,
             chemical: {
                 name: '',
                 manufactoryQuantity: '',
@@ -93,15 +83,10 @@ export default {
                 importUser: '',
                 chemicalProperty: '',
                 purchaseSrc: '',
-                // interested: [],
-                // terms: false
             },
             brandList: null,
             positionLst: null
         }
-    },
-    watch: {
-
     },
     methods: {
         async getAllBrand() {
@@ -113,29 +98,25 @@ export default {
         },
         async submitForm(form$) {
             const data = form$.data
+            const { user } = useAuthStore();
             form$.submitting = true
+            //refine
+            data.registerUser = user.data?.userDto?.username
             if (data.chemicalClass != 'Hóa chất vi sinh') {
                 data.chemicalClassInfo = data.chemicalClassInfo1;
             }
             try {
-                
-                const check = await axiosWrapper.post(API_PATH.CHEMICAL.ADD, data).finally(() => {
-                    console.log("======")
+                await axiosWrapper.post(API_PATH.CHEMICAL.ADD, data).finally(() => {
                     form$.submitting = false;
                 });
-                console.log(check);
             }
             catch (error) {
-                console.log("error");
                 console.log(error);
                 this.errorMessage = error.data.errorMessage;
             }
-
-
         }
     },
     mounted() {
-        console.log(API_PATH.CHEMICAL_ADD);
         this.getAllBrand()
         this.getAllPosition()
     }
