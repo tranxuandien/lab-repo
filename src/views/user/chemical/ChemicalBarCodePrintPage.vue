@@ -5,13 +5,8 @@
         </div>
         <Vueform :endpoint="false" @submit="print">
             <ChemicalSelectBox />
-            <TextElement name="printNumber" input-type="number" placeholder="Nhập số lượng tem" rules="required"
-                :columns="2" :messages="{ required: 'Nhập khối lượng hóa chất' }" :mask="{
-                    mask: 'number',
-                    min: 0,                // minimum allowed value
-                    max: 10,                 // maximum allowed value
-                    autofix: true,              // replace with min/max value if outside of range
-                }"></TextElement>
+            <TextElement name="printNumber" input-type="number" placeholder="Nhập số lượng tem" :rules=[maxPrint] 
+                :columns="2" :messages="{ required: 'Nhập khối lượng hóa chất' }" ></TextElement>
             <ButtonElement name="submit" add-class="mt-2" submits>In tem</ButtonElement>
         </Vueform>
     </div>
@@ -21,8 +16,24 @@
 import ChemicalSelectBox from '@/components/chemical/ChemicalSelectBox.vue'
 import { axiosWrapper } from '@/plugin/axiosWrapper';
 import { API_PATH } from '@/router/apiPath';
+import { Validator } from '@vueform/vueform'
+// maxPrint:
+const maxPrint = class extends Validator {
+  check(value) {
+    return value&&(value<10)&&/^\d+$/.test(value);
+  }
+
+  get msg() {
+    return 'Nhập số lượng tem (không vượt quá 10)'
+  }
+}
 
 export default {
+    data(){
+        return {
+            maxPrint
+        }
+    },
     components: {
         ChemicalSelectBox
     },
