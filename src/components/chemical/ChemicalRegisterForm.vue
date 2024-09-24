@@ -12,8 +12,8 @@
                 placeholder="Loại hóa chất" rules="required" :messages="{ required: 'Chọn loại hóa chất' }" />
             <SelectElement :search="true" name="chemicalTypeInfo" :native="false" :items="['Lọ', 'Gói']" :columns="2"
                 placeholder="Đóng gói" rules="required" :messages="{ required: 'Chọn cách đóng gói' }" />
-            <TextElement rules="required" :messages="{ required: 'Nhập khối lượng hóa chất' }"
-                name="manufactoryQuantity" placeholder="K/lượng,Thể tích" :columns="2" :mask="{
+            <TextElement name="manufactoryQuantity" placeholder="K/lượng,Thể tích" :columns="2" input-type="number"
+                :rules=[validateQuantity] :mask="{
                     mask: 'number',
                     thousandsSeparator: '',     // any single char
                     scale: 2,                   // digits after fractional delimiter, 0 for integers
@@ -53,12 +53,12 @@
                 ]" />
         </GroupElement>
         <!-- <GroupElement name="ImportUser" label="Người nhập hóa chất"> -->
-            <TextElement name="registerUser" :columns="2" hidden="true"/>
+        <TextElement name="registerUser" :columns="2" hidden="true" />
         <!-- </GroupElement> -->
         <GroupElement name="chemicalImportDescription" label="Thông tin nhập hóa chất">
             <SelectElement :search="true" name="position" label-prop="positionInfo" value-prop="id" :items="positionLst"
                 placeholder="Vị trí đặt hóa chất" :columns="2" rules="required"
-                :messages="{ required: 'Chọn vị trí đặt hóa chất' }"/>
+                :messages="{ required: 'Chọn vị trí đặt hóa chất' }" />
             <TextElement name="chemicalStatus" placeholder="Tình trạng hóa chất" :columns="2" />
             <TextElement name="purchaseSrc" placeholder="Nguồn" :columns="2" />
         </GroupElement>
@@ -71,6 +71,18 @@
 import { axiosWrapper } from '@/plugin/axiosWrapper';
 import { API_PATH } from '@/router/apiPath';
 import { useAuthStore } from '@/stores/auth';
+import { Validator } from '@vueform/vueform'
+// 
+const validateQuantity = class extends Validator {
+    check(value) {
+        return value && (value < 100000) && /^\d+$/.test(value);
+    }
+
+    get msg() {
+        return 'Nhập lượng hóa chất (>0 và <100000)'
+    }
+}
+
 
 export default {
     data() {
@@ -85,7 +97,8 @@ export default {
                 purchaseSrc: '',
             },
             brandList: null,
-            positionLst: null
+            positionLst: null,
+            validateQuantity
         }
     },
     methods: {
