@@ -2,12 +2,12 @@
   <aside class="custom-sidenav">
     <ul>
       <li><router-link to="/">Trang chủ</router-link></li>
-      <li><router-link to="/user/chemical">Hóa chất</router-link></li>
+      <li v-if="isShowUser"><router-link to="/user/chemical">Hóa chất</router-link></li>
       <li v-if="isShow"><router-link to="/user/chemical/register">Đăng kí hóa chất</router-link></li>
       <li v-if="isShow"><router-link to="/user/chemical/import/register">Đăng kí nhập hóa chất</router-link></li>
       <li v-if="isShow"><router-link to="/user/chemical/barcode/print">In tem hóa
           chất</router-link></li>
-      <li><router-link to="/user/chemical/using/register">Đăng ký sử dụng hóa
+      <li v-if="isShowUser"><router-link to="/user/chemical/using/register">Đăng ký sử dụng hóa
           chất</router-link></li>
       <!-- <li><router-link to="/devices">Thiết bị</router-link></li>
       <li><router-link to="/checkin">Thông tin checkin</router-link></li> -->
@@ -22,13 +22,15 @@ import { useAuthStore } from '@/stores/auth';
 export default {
   data() {
     return {
-      isShow: false
+      isShow: false,
+      isShowUser: false
     }
   },
   methods: {
     checkIsShow() {
       const { hasRoleAdmin, isLogIn } = useAuthStore();
       this.isShow = hasRoleAdmin() && isLogIn();
+      this.isShowUser = isLogIn();
     }
   },
   mounted() {
