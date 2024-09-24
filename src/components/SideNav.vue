@@ -7,8 +7,8 @@
       <li v-if="isShow"><router-link to="/user/chemical/import/register">Đăng kí nhập hóa chất</router-link></li>
       <li v-if="isShow"><router-link to="/user/chemical/barcode/print">In tem hóa
           chất</router-link></li>
-          <li v-if="isShow"><router-link to="/user/chemical/using/register">Đăng ký sử dụng hóa
-            chất</router-link></li>
+      <li><router-link to="/user/chemical/using/register">Đăng ký sử dụng hóa
+          chất</router-link></li>
       <!-- <li><router-link to="/devices">Thiết bị</router-link></li>
       <li><router-link to="/checkin">Thông tin checkin</router-link></li> -->
       <li><router-link to="/about">Giới thiệu</router-link></li>
