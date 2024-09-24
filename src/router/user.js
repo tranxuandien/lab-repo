@@ -3,6 +3,7 @@ import ChemicalPage from '@/views/user/chemical/ChemicalPage.vue'
 import ChemicalRegisterPage from '@/views/user/chemical/ChemicalRegisterPage.vue'
 import ChemicalImportRegisterPage from '@/views/user/chemical/ChemicalImportRegisterPage.vue'
 import ChemicalBarCodePrintPage from '@/views/user/chemical/ChemicalBarCodePrintPage.vue'
+import ChemicalUsingRegisterPage from '@/views/user/chemical/ChemicalUsingRegisterPage.vue'
 import { useAuthStore } from '@/stores/auth';
 
 export default {
@@ -33,6 +34,11 @@ export default {
             path: 'chemical/barcode/print',
             name: 'chemicalBarCodePrintPage',
             component: ChemicalBarCodePrintPage
+        },
+        {
+            path: 'chemical/using/register',
+            name: 'chemicalUsingRegisterPage',
+            component: ChemicalUsingRegisterPage
         },
     ]
 }

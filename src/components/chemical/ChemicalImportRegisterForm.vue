@@ -11,7 +11,7 @@
         </ButtonElement>
       </Vueform>
     </div>
-    <div>
+    <div v-if="chemical">
       <table class="table table-bordered table-striped table-hover">
         <thead class="thead-dark">
           <tr>
@@ -67,16 +67,19 @@ export default {
       if (n.length == 10)//check barcode length
       {
         try {
-          this.chemical = await axiosWrapper.get(API_PATH.CHEMICAL.REGISTER+"?barcode=" + n);
+          this.chemical = await axiosWrapper.get(API_PATH.CHEMICAL.REGISTER + "?barcode=" + n);
         } catch (error) {
           console.error('There was a problem with the axios request:', error);
         }
+      }
+      else {
+        this.chemical = null
       }
       return;
     }
     ,
     async chemicalImport() {
-      const res = await axiosWrapper.get(API_PATH.CHEMICAL.IMPORT+"?barcode=" + this.$refs.form$.data.barcode);
+      const res = await axiosWrapper.get(API_PATH.CHEMICAL.IMPORT + "?barcode=" + this.$refs.form$.data.barcode);
       this.chemical = res.data;
       this.$refs.form$.update({ // updates form data
         barcode: '',

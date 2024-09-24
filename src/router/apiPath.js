@@ -9,6 +9,9 @@ export const API_PATH = {
         PRINT: "api/v1/admin/chemical/codeprint",
         LIST: "api/v1/chemical/list",
         LIST_MASTER: "api/v1/chemical/list/master",
+        //using
+        USING_GET: "api/v1/chemical/using/get",
+        USING: "api/v1/chemical/using",
     },
     ACCOUNT: {
         USER_REGISTER: "api/auth/register",
