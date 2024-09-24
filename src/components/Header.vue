@@ -5,6 +5,7 @@
     </div>
     <div v-if="user" class="d-flex flex-row-reverse">Xin chào {{ user.username }}</div>
     <div v-if="user" class="d-flex flex-row-reverse"><a href="#" @click="logout">Đăng xuất</a></div>
+    <div v-if="!user" class="d-flex flex-row-reverse"><a href="auth/login">Đăng nhập</a></div>
   </header>
 </template>
 <script>
@@ -22,7 +23,7 @@ export default {
   },
   mounted() {
     const { user } = useAuthStore();
-    this.user = user.data.userDto;
+    this.user = user?.data?.userDto;
   }
 }
 </script>

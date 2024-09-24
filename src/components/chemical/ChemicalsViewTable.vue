@@ -1,11 +1,9 @@
 <template>
     <div class="container mt-6">
-        
-
-
-        <div class="card">
+        <div v-if="chemicals" class="card">
             <DataTable :value="chemicals" showGridlines="true" paginator :rows="5" :rowsPerPageOptions="[5, 10, 20, 50]"
-                tableStyle="min-width: 50rem" paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
+                tableStyle="min-width: 50rem"
+                paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
                 currentPageReportTemplate="{first} to {last} of {totalRecords}">
                 <Column field="name" header="Tên hóa chất" style="width: 10%"></Column>
                 <Column field="brand" header="Hãng sản xuất" style="width: 10%"></Column>

@@ -63,7 +63,7 @@
             <TextElement name="purchaseSrc" placeholder="Nguồn" :columns="2" />
         </GroupElement>
         <ButtonElement name="submit" add-class="mt-2" submits>
-            Đăng kí hóa chẩt
+            Đăng kí hóa chất
         </ButtonElement>
     </Vueform>
 </template>

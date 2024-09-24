@@ -5,7 +5,8 @@ import accountRouter from './account'
 import userRouter from './user'
 import Login from '@/views/auth/Login.vue'
 import Layout from '@/views/auth/Layout.vue'
-import { useAuthStore } from '@/stores/auth';
+import HomeLayout from '@/views/user/Layout.vue'
+import { useAuthStore } from '@/stores/auth'
 import PageNotFound from '@/views/PageNotFound.vue'
 
 const Router = createRouter({
@@ -13,8 +14,19 @@ const Router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'Home',
-      component: Home
+      component: HomeLayout,
+      children: [
+        {
+          path: '/',
+          name: 'Home',
+          component: Home,
+        },
+        {
+          path: '/about',
+          name: 'About',
+          component: About
+        },
+      ]
     },
     { ...accountRouter },
     { ...userRouter },
@@ -39,11 +51,7 @@ const Router = createRouter({
     //   name: 'checkin',
     //   component: CheckInPage
     // },
-    {
-      path: '/about',
-      name: 'About',
-      component: About
-    },
+
     {
       path: "/:pathMatch(.*)*",
       name: 'PageNotFound',
