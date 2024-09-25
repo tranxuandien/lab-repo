@@ -71,7 +71,7 @@ import { axiosWrapper } from '@/plugin/axiosWrapper';
 import { API_PATH } from '@/router/apiPath';
 import { useAuthStore } from '@/stores/auth';
 import { Validator } from '@vueform/vueform'
-// 
+//re-deploy
 const validateQuantity = class extends Validator {
     check(value) {
         return value && (value < 100000) && /^\d+$/.test(value);
