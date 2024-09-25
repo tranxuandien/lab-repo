@@ -6,7 +6,18 @@
                     <TextElement name="barcode" placeholder="Mã hóa chất" :columns="3" @change="getInfo">
                     </TextElement>
                     <TextElement name="quantity" placeholder="Số lượng sử dụng" :columns="3" rules="required"
-                    :messages="{ required: 'Nhập lượng hóa chất sử dụng' }">
+                        :messages="{ required: 'Nhập lượng hóa chất sử dụng' }" :mask="{
+                            mask: 'number',
+                            thousandsSeparator: ',',     // any single char
+                            scale: 2,                   // digits after fractional delimiter, 0 for integers
+                            padFractionalZeros: false,  // pads zeros at end to the length of scale
+                            normalizeZeros: true,       // removes zeros at ends (eg. 1,10 -> 1,1)
+                            radix: '.',                 // fractional delimiter
+                            mapToRadix: ['.'],          // symbols to process as radix
+                            min: 0,                // minimum allowed value
+                            max: 10000,                 // maximum allowed value
+                            autofix: true,              // replace with min/max value if outside of range
+                        }">
                     </TextElement>
                     (g/ml)
                 </GroupElement>

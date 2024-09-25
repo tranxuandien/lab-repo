@@ -5,6 +5,7 @@ import vueform from '@vueform/vueform/dist/vueform'
 import { defineConfig } from '@vueform/vueform'
 import api from './plugin/axios'
 import axios from 'axios'
+import PluginMask from '@vueform/plugin-mask'
 
 api.defaults.headers.post = {
   'Content-Type': 'application/json'
@@ -18,6 +19,9 @@ export default defineConfig({
   endpoints: {
     
   },
-  axios
+  axios,
+  plugins: [
+    PluginMask,
+  ]
 })
 

@@ -12,14 +12,13 @@
                 placeholder="Loại hóa chất" rules="required" :messages="{ required: 'Chọn loại hóa chất' }" />
             <SelectElement :search="true" name="chemicalTypeInfo" :native="false" :items="['Lọ', 'Gói']" :columns="2"
                 placeholder="Đóng gói" rules="required" :messages="{ required: 'Chọn cách đóng gói' }" />
-            <TextElement name="manufactoryQuantity" placeholder="K/lượng,Thể tích" :columns="2" input-type="number"
-                :rules=[validateQuantity] :mask="{
+            <TextElement name="manufactoryQuantity" placeholder="K/lượng,Thể tích" :columns="2"  :mask="{
                     mask: 'number',
-                    thousandsSeparator: '',     // any single char
+                    thousandsSeparator: ',',     // any single char
                     scale: 2,                   // digits after fractional delimiter, 0 for integers
                     padFractionalZeros: false,  // pads zeros at end to the length of scale
                     normalizeZeros: true,       // removes zeros at ends (eg. 1,10 -> 1,1)
-                    radix: ',',                 // fractional delimiter
+                    radix: '.',                 // fractional delimiter
                     mapToRadix: ['.'],          // symbols to process as radix
                     min: 0,                // minimum allowed value
                     max: 10000,                 // maximum allowed value
