@@ -12,7 +12,7 @@
                 placeholder="Loại hóa chất" rules="required" :messages="{ required: 'Chọn loại hóa chất' }" />
             <SelectElement :search="true" name="chemicalTypeInfo" :native="false" :items="['Lọ', 'Gói']" :columns="2"
                 placeholder="Đóng gói" rules="required" :messages="{ required: 'Chọn cách đóng gói' }" />
-            <TextElement name="manufactoryQuantity" placeholder="K/lượng,Thể tích" :columns="2"  :mask="{
+            <TextElement name="manufactoryQuantity" placeholder="K/lượng,Thể tích" :columns="2" rules="required" :messages="{ required: 'Nhập lượng hóa chất' }" :mask="{
                     mask: 'number',
                     thousandsSeparator: ',',     // any single char
                     scale: 2,                   // digits after fractional delimiter, 0 for integers
