@@ -9,11 +9,13 @@
   },
   "dependencies": {
     "@primevue/themes": "^4.0.7",
+    "@vueform/plugin-mask": "^1.0.7",
     "@vueform/vueform": "^1.9.6",
     "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
     "core-js": "^3.8.3",
     "pinia": "^2.2.2",
+    "primeicons": "^7.0.0",
     "primevue": "^4.0.7",
     "vue": "^3.2.0",
     "vue-router": "^4.4.4",
@@ -46,7 +48,8 @@
       "parser": "@babel/eslint-parser"
     },
     "rules": {
-      "vue/multi-word-component-names": "off"
+      "vue/multi-word-component-names": "off",
+      "vue/no-v-model-argument": "off"
     }
   },
   "browserslist": [
