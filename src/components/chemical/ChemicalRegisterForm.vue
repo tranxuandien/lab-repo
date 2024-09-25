@@ -14,7 +14,7 @@
                 placeholder="Đóng gói" rules="required" :messages="{ required: 'Chọn cách đóng gói' }" />
             <TextElement name="manufactoryQuantity" placeholder="K/lượng,Thể tích" :columns="2" rules="required" :messages="{ required: 'Nhập lượng hóa chất' }" :mask="{
                     mask: 'number',
-                    thousandsSeparator: ',',     // any single char
+                    thousandsSeparator: '',     // any single char
                     scale: 2,                   // digits after fractional delimiter, 0 for integers
                     padFractionalZeros: false,  // pads zeros at end to the length of scale
                     normalizeZeros: true,       // removes zeros at ends (eg. 1,10 -> 1,1)
