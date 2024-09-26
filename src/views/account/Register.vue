@@ -45,6 +45,7 @@
         <CheckboxElement name="terms" text="Đồng ý với điều kiện và điều khoản sử dụng." />
         <StaticElement name="divider_1" tag="hr" />
         <ButtonElement name="register" :submits="true" button-label="Tạo tài khoản" :full="true" size="md" :columns="2"/>
+        <ButtonElement name="login" :submits="false" button-label="Đăng nhập" href="/auth/login" button-type="anchor" :full="true" size="md" :columns="2"/>
     </Vueform>
 </template>
 

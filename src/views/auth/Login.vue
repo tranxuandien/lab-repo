@@ -25,7 +25,8 @@
             }" />
         </GroupElement>
         <StaticElement name="divider_1" tag="hr" />
-        <ButtonElement name="login" :submits="true" button-label="Đăng nhập" :full="true" size="md" :columns="2" />
+        <ButtonElement name="login" :submits="true" button-label="Đăng nhập" :full="true" size="md" :columns="3" />
+        <ButtonElement name="register" button-label="Đăng ký" size="md" :columns="2" button-type="anchor" href="/account/register"/>
     </Vueform>
 </template>
 
