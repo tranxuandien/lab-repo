@@ -17,6 +17,7 @@ export const API_PATH = {
     },
     ACCOUNT: {
         USER_REGISTER: "api/auth/register",
+        USER_ACTIVE: "api/auth/register/active?token=",
     },
     AUTH: {
         LOGIN: "api/auth/login",
