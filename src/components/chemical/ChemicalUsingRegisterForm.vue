@@ -3,7 +3,8 @@
         <div>
             <Vueform ref="form$" @submit="chemicalUsing">
                 <GroupElement name="scanCode">
-                    <TextElement name="barcode" placeholder="Mã hóa chất" :columns="3" @change="getInfo">
+                    <TextElement name="barcode" placeholder="Mã hóa chất" :columns="3" @change="getInfo"
+                        rules="required" :messages="{ required: 'Nhập mã hóa chất' }">
                     </TextElement>
                     <TextElement name="quantity" placeholder="Số lượng sử dụng" :columns="3" rules="required"
                         :messages="{ required: 'Nhập lượng hóa chất sử dụng' }" :mask="{

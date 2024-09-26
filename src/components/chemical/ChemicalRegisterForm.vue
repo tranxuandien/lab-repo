@@ -7,12 +7,9 @@
                 :items="brandList" placeholder="Nơi sản xuất" :columns="3" rules="required"
                 :messages="{ required: 'Chọn nơi sản xuất' }" />
         </GroupElement>
-        <GroupElement name="chemicalDescription" label="Mô tả hóa chất">
-            <SelectElement :search="true" name="chemicalType" :native="false" :items="['Dung dịch', 'Bột']" :columns="2"
-                placeholder="Loại hóa chất" rules="required" :messages="{ required: 'Chọn loại hóa chất' }" />
-            <SelectElement :search="true" name="chemicalTypeInfo" :native="false" :items="['Lọ', 'Gói']" :columns="2"
-                placeholder="Đóng gói" rules="required" :messages="{ required: 'Chọn cách đóng gói' }" />
-            <TextElement name="manufactoryQuantity" placeholder="K/lượng,Thể tích" :columns="2" rules="required" :messages="{ required: 'Nhập lượng hóa chất' }" :mask="{
+        <!-- <GroupElement name="chemicalDescription" label="Mô tả hóa chất"> -->
+
+        <!-- <TextElement name="manufactoryQuantity" placeholder="K/lượng,Thể tích" :columns="2" rules="required" :messages="{ required: 'Nhập lượng hóa chất' }" :mask="{
                     mask: 'number',
                     thousandsSeparator: '',     // any single char
                     scale: 2,                   // digits after fractional delimiter, 0 for integers
@@ -23,16 +20,17 @@
                     min: 0,                // minimum allowed value
                     max: 10000,                 // maximum allowed value
                     autofix: true,              // replace with min/max value if outside of range
-                }" />
+                }" /> -->
 
-            <TextElement name="otherInfo" :native="false" :columns="2" placeholder="Mô tả khác" />
-            <DateElement name="expiredDate" :columns="1" placeholder="Hạn sử dụng" rules="required"
-                :messages="{ required: 'Chọn hạn sử dụng' }" />
-        </GroupElement>
+
+        <!-- <DateElement name="expiredDate" :columns="1" placeholder="Hạn sử dụng" rules="required"
+                :messages="{ required: 'Chọn hạn sử dụng' }" /> -->
+        <!-- </GroupElement> -->
         <GroupElement name="chemicalClassGroup" label="Phân loại hóa chất">
             <SelectElement :search="true" name="chemicalClass" :native="false"
                 :items="['Sinh học phân tử', 'Hóa chất vi sinh', 'Dung môi']" :columns="2"
-                placeholder="Phân loại hóa chất" default="Sinh học phân tử" />
+                placeholder="Phân loại hóa chất" default="Sinh học phân tử" rules="required"
+                :messages="{ required: 'Chọn phân loại hóa chất' }" />
 
             <SelectElement :search="true" name="chemicalClassInfo" :native="false" :items="['Vô cơ', 'Hữu cơ']"
                 :columns="2" placeholder="Loại HC vi sinh" :conditions="[
@@ -41,7 +39,7 @@
                         '==',
                         'Hóa chất vi sinh'
                     ]
-                ]" />
+                ]" rules="required" :messages="{ required: 'Chọn loại HC vi sinh' }" />
             <TextElement name="chemicalClassInfo1" :native="false" :columns="3" placeholder="Mô tả phân loại hóa chất"
                 :conditions="[
                     [
@@ -49,17 +47,23 @@
                         '!=',
                         'Hóa chất vi sinh'
                     ]
-                ]" />
+                ]" rules="required" :messages="{ required: 'Chọn mô tả phân loại hóa chất' }" />
+            <TextElement name="otherInfo" :native="false" :columns="2" placeholder="Mô tả khác" />
         </GroupElement>
         <!-- <GroupElement name="ImportUser" label="Người nhập hóa chất"> -->
         <TextElement name="registerUser" :columns="2" hidden="true" />
         <!-- </GroupElement> -->
         <GroupElement name="chemicalImportDescription" label="Thông tin nhập hóa chất">
-            <SelectElement :search="true" name="position" label-prop="positionInfo" value-prop="id" :items="positionLst"
+            <!-- <SelectElement :search="true" name="position" label-prop="positionInfo" value-prop="id" :items="positionLst"
                 placeholder="Vị trí đặt hóa chất" :columns="2" rules="required"
                 :messages="{ required: 'Chọn vị trí đặt hóa chất' }" />
             <TextElement name="chemicalStatus" placeholder="Tình trạng hóa chất" :columns="2" />
-            <TextElement name="purchaseSrc" placeholder="Nguồn" :columns="2" />
+            <TextElement name="purchaseSrc" placeholder="Nguồn" :columns="2" /> -->
+            <SelectElement :search="true" name="chemicalType" :native="false" :items="['Dung dịch', 'Bột']" :columns="2"
+                placeholder="Loại hóa chất" rules="required" :messages="{ required: 'Chọn loại hóa chất' }"
+                default="Dung dịch" />
+            <SelectElement :search="true" name="chemicalTypeInfo" :native="false" :items="['Lọ', 'Gói']" :columns="2"
+                placeholder="Đóng gói" rules="required" :messages="{ required: 'Chọn cách đóng gói' }" default="Lọ" />
         </GroupElement>
         <ButtonElement name="submit" add-class="mt-2" submits>
             Đăng kí hóa chất
@@ -70,18 +74,6 @@
 import { axiosWrapper } from '@/plugin/axiosWrapper';
 import { API_PATH } from '@/router/apiPath';
 import { useAuthStore } from '@/stores/auth';
-import { Validator } from '@vueform/vueform'
-//re-deploy
-const validateQuantity = class extends Validator {
-    check(value) {
-        return value && (value < 100000) && /^\d+$/.test(value);
-    }
-
-    get msg() {
-        return 'Nhập lượng hóa chất (>0 và <100000)'
-    }
-}
-
 
 export default {
     data() {
@@ -97,7 +89,6 @@ export default {
             },
             brandList: null,
             positionLst: null,
-            validateQuantity
         }
     },
     methods: {
@@ -105,9 +96,6 @@ export default {
             this.brandList = await axiosWrapper.get(API_PATH.BRAND);
         }
         ,
-        async getAllPosition() {
-            this.positionLst = await axiosWrapper.get(API_PATH.POSITION);
-        },
         async submitForm(form$) {
             const data = form$.data
             const { user } = useAuthStore();
@@ -130,7 +118,6 @@ export default {
     },
     mounted() {
         this.getAllBrand()
-        this.getAllPosition()
     }
 }
 </script>

@@ -1,12 +1,37 @@
 <template>
   <div>
     <div>
-      <Vueform ref="form$">
+      <Vueform ref="form$" @submit="chemicalImport">
         <GroupElement name="scanCode" label="Mã barcode hóa chất">
-          <TextElement name="barcode" placeholder="Mã hóa chất" :columns="6" @change="getInfo">
+          <TextElement name="barcode" placeholder="Mã hóa chất" :columns="6" @change="getInfo" rules="required"
+            :messages="{ required: 'Nhập mã barcode hóa chất' }">
           </TextElement>
         </GroupElement>
-        <ButtonElement :disabled="!chemical" name="submit" add-class="mt-2 btn-import" @click="chemicalImport">
+        <GroupElement name="importInfo" label="Thông tin nhập hóa chất">
+          <TextElement name="manufactoryQuantity" placeholder="K/lượng,Thể tích" :columns="2" rules="required"
+            :messages="{ required: 'Nhập lượng hóa chất' }" :mask="{
+              mask: 'number',
+              thousandsSeparator: '',     // any single char
+              scale: 2,                   // digits after fractional delimiter, 0 for integers
+              padFractionalZeros: false,  // pads zeros at end to the length of scale
+              normalizeZeros: true,       // removes zeros at ends (eg. 1,10 -> 1,1)
+              radix: '.',                 // fractional delimiter
+              mapToRadix: ['.'],          // symbols to process as radix
+              min: 0,                // minimum allowed value
+              max: 10000,                 // maximum allowed value
+              autofix: true,              // replace with min/max value if outside of range
+            }" />
+          <DateElement name="expiredDate" :columns="1" placeholder="Hạn sử dụng" rules="required"
+            :messages="{ required: 'Chọn hạn sử dụng' }" />
+        </GroupElement>
+        <GroupElement name="importInfo#">
+          <SelectElement :search="true" name="position" label-prop="positionInfo" value-prop="id" :items="positionLst"
+            placeholder="Vị trí đặt hóa chất" :columns="2" rules="required"
+            :messages="{ required: 'Chọn vị trí đặt hóa chất' }" />
+          <TextElement name="chemicalStatus" placeholder="Tình trạng hóa chất" :columns="2" />
+          <TextElement name="purchaseSrc" placeholder="Nguồn" :columns="2" />
+        </GroupElement>
+        <ButtonElement :disabled="!chemical" submits name="submit" add-class="mt-2 btn-import">
           Đăng kí
         </ButtonElement>
       </Vueform>
@@ -54,17 +79,17 @@
 <script>
 import { axiosWrapper } from '@/plugin/axiosWrapper';
 import { API_PATH } from '@/router/apiPath';
-import { toast } from 'vue3-toastify';
 
 export default {
   data() {
     return {
-      chemical: null
+      chemical: null,
+      positionLst: []
     }
   },
   methods: {
     async getInfo(n) {
-      if (n.length == 10)//check barcode length
+      if (/^\d+$/.test(n) && n.length == 10)//check barcode length
       {
         try {
           this.chemical = await axiosWrapper.get(API_PATH.CHEMICAL.REGISTER + "?barcode=" + n);
@@ -78,24 +103,20 @@ export default {
       return;
     }
     ,
-    async chemicalImport() {
-      const res = await axiosWrapper.get(API_PATH.CHEMICAL.IMPORT + "?barcode=" + this.$refs.form$.data.barcode);
-      this.chemical = res.data;
-      this.$refs.form$.update({ // updates form data
-        barcode: '',
-      })
-
-      if (!res.data.errorMessage) {
-        toast.success("Đã nhập mã code hóa chất!", {
-          position: toast.POSITION.TOP_CENTER,
-        });
-      }
-      else {
-        toast.error(res.data.errorMessage, {
-          position: toast.POSITION.TOP_CENTER,
-        });
-      }
+    async chemicalImport($form) {
+      const data = $form.data;
+      console.log($form)
+      await axiosWrapper.post(API_PATH.CHEMICAL.IMPORT, data).then(() => {
+        this.$refs.form$.reset();
+        this.chemical = null;
+      });
+    },
+    async getAllPosition() {
+      this.positionLst = await axiosWrapper.get(API_PATH.POSITION);
     }
+  },
+  mounted() {
+    this.getAllPosition()
   }
 }
 </script>

@@ -1,13 +1,17 @@
 <template>
   <div>
     <div style="margin-bottom: 10px;">
-      <b><h2>Danh sách hóa chất</h2></b>
+      <b>
+        <h2>Danh sách hóa chất</h2>
+      </b>
     </div>
     <div>
-      <div class="col-md-12 d-flex justify-content-center"><SearchChemicalForm @getData="searchData" /></div>
+      <div class="col-md-12 d-flex justify-content-center">
+        <SearchChemicalForm @getData="searchData" />
+      </div>
     </div>
     <div>
-      <ChemicalsViewTable :chemicals="chemicals" />
+      <ChemicalsViewTable :chemicals="chemicals" @updateData="updateDataTable" />
     </div>
   </div>
 </template>
@@ -29,9 +33,11 @@ export default {
   ,
   methods: {
     searchData(data) {
-      console.log("child data")
       console.log(data)
       this.chemicals = data;
+    },
+    updateDataTable(chemicalId) {
+      this.chemicals = this.chemicals.filter(item => item.id != chemicalId);
     }
   }
 }

@@ -4,7 +4,7 @@ import Router from './router/index'
 import Vueform from '@vueform/vueform'
 import vueformConfig from './vueform.config'
 import { createApp } from 'vue'
-
+import 'primeicons/primeicons.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap'
 import '@/assets/main.css'
