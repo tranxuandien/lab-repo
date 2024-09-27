@@ -12,8 +12,11 @@ export const API_PATH = {
         //using
         USING_GET: "api/v1/chemical/using/get",
         USING: "api/v1/chemical/using",
+        //Inventory
+        INVENTORY_LIST:"api/v1/admin/chemical/inventory/list",
         //Delete
-        DELETE: "api/v1/chemical/delete"
+        DELETE: "api/v1/chemical/delete",
+        INVENTORY_DELETE: "api/v1/admin/chemical/inventory/delete"
     },
     ACCOUNT: {
         USER_REGISTER: "api/auth/register",

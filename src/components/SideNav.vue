@@ -9,8 +9,8 @@
           chất</router-link></li>
       <li v-if="isShowUser"><router-link to="/user/chemical/using/register">Đăng ký sử dụng hóa
           chất</router-link></li>
-      <!-- <li><router-link to="/devices">Thiết bị</router-link></li>
-      <li><router-link to="/checkin">Thông tin checkin</router-link></li> -->
+      <li v-if="isShow"><router-link to="/user/chemical/manager">Kiểm tra tình trạng HC</router-link></li>
+      <!-- <li><router-link to="/checkin">Thông tin checkin</router-link></li>  -->
       <li><router-link to="/about">Giới thiệu</router-link></li>
     </ul>
   </aside>
