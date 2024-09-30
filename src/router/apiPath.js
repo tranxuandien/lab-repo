@@ -7,6 +7,7 @@ export const API_PATH = {
         //
         ADD: "api/v1/admin/chemical/add",
         PRINT: "api/v1/admin/chemical/codeprint",
+        RE_PRINT: "api/v1/admin/chemical/code/reprint",
         LIST: "api/v1/chemical/list",
         LIST_MASTER: "api/v1/chemical/list/master",
         //using
@@ -16,6 +17,7 @@ export const API_PATH = {
         INVENTORY_LIST:"api/v1/admin/chemical/inventory/list",
         //History
         HISTORY: "api/v1/chemical/impexp/list",
+        HISTORY_CHART: "api/v1/chemical/impexp/chart/list",
         //Delete
         DELETE: "api/v1/chemical/delete",
         INVENTORY_DELETE: "api/v1/admin/chemical/inventory/delete"

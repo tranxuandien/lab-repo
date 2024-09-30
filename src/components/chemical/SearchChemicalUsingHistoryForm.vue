@@ -61,10 +61,11 @@ export default {
         async doSearch(form$) {
             const data = form$.data;
             form$.submitting = true;
-            const result = await axiosWrapper.post(API_PATH.CHEMICAL.HISTORY, data).finally(() => {
+            const tableResult = await axiosWrapper.post(API_PATH.CHEMICAL.HISTORY, data);
+            const chartResult = await axiosWrapper.post(API_PATH.CHEMICAL.HISTORY_CHART, data).finally(() => {
                 form$.submitting = false;
             })
-            this.$emit('getData', result.data);
+            this.$emit('getData', tableResult.data, chartResult.data);
         },
         hasPermission(role) {
             const user = useAuthStore().user;
