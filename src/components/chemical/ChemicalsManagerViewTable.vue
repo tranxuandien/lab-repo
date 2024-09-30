@@ -22,11 +22,13 @@
                 <Column field="chemicalStatus" header="Khác" style="width: 10%"></Column>
                 <Column field="purchaseSrc" header="Khác" style="width: 10%"></Column>
                 <Column v-if="hasPermission('ROLE_ADMIN')" :exportable="false" style="min-width: 12rem;width: 5%;"
-                    header="Cập nhật">
+                    header="Xóa/In lại tem">
                     <template #body="slotProps">
                         <!-- <Button icon="pi pi-pencil" outlined rounded class="mr-2" @click="editProduct(slotProps.data)" /> -->
-                        <Button icon="pi pi-trash" outlined rounded severity="danger"
-                            @click="confirmDeleteChemical(slotProps.data)">Xóa</Button>
+                        <Button icon="pi pi-trash" outlined severity="danger"
+                            @click="confirmDeleteChemical(slotProps.data)"></Button>
+                        <Button icon="pi pi-print" outlined severity="success"
+                            @click="confirmRePrintChemicalBarCode(slotProps.data)"></Button>
                     </template>
                 </Column>
             </DataTable>
@@ -109,6 +111,12 @@ export default {
                 data.impExpInfo = "Mới";
                 return 'success';
             }
+        },
+        async confirmRePrintChemicalBarCode(item) {
+            console.log(item)
+            await axiosWrapper.get(API_PATH.CHEMICAL.RE_PRINT + '?chemicalName=' + item.originName + '&barcode=' + item.barcode, null, true)
+                .finally(() => {
+                })
         }
     },
 }
