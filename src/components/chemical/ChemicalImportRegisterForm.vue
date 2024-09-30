@@ -3,12 +3,12 @@
     <div>
       <Vueform ref="form$" @submit="chemicalImport">
         <GroupElement name="scanCode" label="Mã barcode hóa chất">
-          <TextElement name="barcode" placeholder="Mã hóa chất" :columns="6" @change="getInfo" rules="required"
-            :messages="{ required: 'Nhập mã barcode hóa chất' }">
+          <TextElement id="barcode" name="barcode" placeholder="Mã hóa chất" :columns="6" @change="getInfo"
+            rules="required" :messages="{ required: 'Nhập mã barcode hóa chất' }">
           </TextElement>
         </GroupElement>
         <GroupElement name="importInfo" label="Thông tin nhập hóa chất">
-          <TextElement name="manufactoryQuantity" placeholder="K/lượng,Thể tích" :columns="2" rules="required"
+          <TextElement id="quantity" name="manufactoryQuantity" placeholder="K/lượng,Thể tích" :columns="2" rules="required"
             :messages="{ required: 'Nhập lượng hóa chất' }" :mask="{
               mask: 'number',
               thousandsSeparator: '',     // any single char
@@ -92,7 +92,10 @@ export default {
       if (/^\d+$/.test(n) && n.length == 10)//check barcode length
       {
         try {
-          this.chemical = await axiosWrapper.get(API_PATH.CHEMICAL.REGISTER + "?barcode=" + n);
+          await axiosWrapper.get(API_PATH.CHEMICAL.REGISTER + "?barcode=" + n).then((data) => {
+            this.chemical = data;
+            document.getElementById("quantity").focus();
+          });
         } catch (error) {
           console.error('There was a problem with the axios request:', error);
         }
@@ -109,6 +112,7 @@ export default {
       await axiosWrapper.post(API_PATH.CHEMICAL.IMPORT, data).then(() => {
         this.$refs.form$.reset();
         this.chemical = null;
+        document.getElementById("barcode").focus();
       });
     },
     async getAllPosition() {

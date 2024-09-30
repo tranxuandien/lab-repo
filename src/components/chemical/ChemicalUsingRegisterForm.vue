@@ -3,11 +3,11 @@
         <div>
             <Vueform ref="form$" @submit="chemicalUsing">
                 <GroupElement name="scanCode">
-                    <TextElement name="barcode" placeholder="Mã hóa chất" :columns="3" @change="getInfo"
+                    <TextElement id="barcode" name="barcode" placeholder="Mã hóa chất" :columns="3" @change="getInfo"
                         rules="required" :messages="{ required: 'Nhập mã hóa chất' }">
                     </TextElement>
-                    <TextElement name="quantity" placeholder="Số lượng sử dụng" :columns="3" rules="required"
-                        :messages="{ required: 'Nhập lượng hóa chất sử dụng' }" :mask="{
+                    <TextElement id="quantity" name="quantity" placeholder="Số lượng sử dụng" :columns="3"
+                        rules="required" :messages="{ required: 'Nhập lượng hóa chất sử dụng' }" :mask="{
                             mask: 'number',
                             thousandsSeparator: '',     // any single char
                             scale: 2,                   // digits after fractional delimiter, 0 for integers
@@ -79,10 +79,13 @@ export default {
     },
     methods: {
         async getInfo(n) {
-            if (n.length == 10)//check barcode length
+            if (/^\d+$/.test(n) && n.length == 10)//check barcode length
             {
                 try {
-                    this.chemical = await axiosWrapper.get(API_PATH.CHEMICAL.USING_GET + "?barcode=" + n);
+                    await axiosWrapper.get(API_PATH.CHEMICAL.USING_GET + "?barcode=" + n).then((data) => {
+                        this.chemical = data;
+                        document.getElementById("quantity").focus();
+                    });
                 } catch (error) {
                     console.error('There was a problem with the axios request:', error);
                 }
@@ -94,13 +97,13 @@ export default {
         }
         ,
         async chemicalUsing(form$) {
-            console.log("submit form")
             const data = form$.data
-            console.log(data)
             form$.submitting = true
             try {
                 await axiosWrapper.post(API_PATH.CHEMICAL.USING, data).finally(() => {
                     form$.submitting = false;
+                    form$.reset();
+                    document.getElementById("barcode").focus();
                 });
             }
             catch (error) {
