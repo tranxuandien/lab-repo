@@ -6,6 +6,7 @@ import ChemicalBarCodePrintPage from '@/views/user/chemical/ChemicalBarCodePrint
 import ChemicalUsingRegisterPage from '@/views/user/chemical/ChemicalUsingRegisterPage.vue'
 import ChemicalManagerPage from '@/views/user/chemical/ChemicalManagerPage.vue'
 import ChemicalUsingHistoryPage from '@/views/user/chemical/ChemicalUsingHistoryPage.vue'
+import ChemicalUpdatePage from '@/views/user/chemical/ChemicalUpdatePage.vue'
 import { useAuthStore } from '@/stores/auth';
 
 export default {
@@ -26,6 +27,11 @@ export default {
             path: 'chemical/register',
             name: 'chemicalRegister',
             component: ChemicalRegisterPage
+        },
+        {
+            path: 'chemical/update/:id',
+            name: 'chemicalUpdate',
+            component: ChemicalUpdatePage
         },
         {
             path: 'chemical/import/register',

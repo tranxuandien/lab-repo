@@ -20,9 +20,9 @@
                 <Column v-if="hasPermission('ROLE_ADMIN')" :exportable="false" style="min-width: 12rem;width: 5%;"
                     header="Cập nhật">
                     <template #body="slotProps">
-                        <!-- <Button icon="pi pi-pencil" outlined rounded class="mr-2" @click="editProduct(slotProps.data)" /> -->
+                        <Button icon="pi pi-pencil" outlined rounded class="mr-2" @click="editChemical(slotProps.data)"></Button>
                         <Button icon="pi pi-trash" outlined rounded severity="danger"
-                            @click="confirmDeleteChemical(slotProps.data)">Xóa</Button>
+                            @click="confirmDeleteChemical(slotProps.data)"></Button>
                     </template>
                 </Column>
             </DataTable>
@@ -48,6 +48,7 @@ import Button from 'primevue/button';
 import { axiosWrapper } from '@/plugin/axiosWrapper';
 import { API_PATH } from '@/router/apiPath';
 import { useAuthStore } from '@/stores/auth';
+import Router from '@/router';
 
 export default {
     components: {
@@ -84,6 +85,9 @@ export default {
                 this.chemical = {};
             });
         },
+        editChemical(data){
+            Router.push("/user/chemical/update/"+data.id);
+        }
     },
 }
 </script>
