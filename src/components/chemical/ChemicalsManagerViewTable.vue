@@ -103,7 +103,7 @@ export default {
                 data.impExpInfo = 'Hết';
                 return 'danger';
             }
-            else if (data.remain > 0 && data.remain < 100) {
+            else if (data.remain > 0 && data.remain <= 100) {
                 data.impExpInfo = "Sắp hết";
                 return 'warn';
             }

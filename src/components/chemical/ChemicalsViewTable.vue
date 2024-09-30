@@ -12,7 +12,7 @@
                 <!-- <Column field="remain" header="Khối lượng còn lại" style="width: 10%"></Column> -->
                 <Column field="chemicalTypeInfo" header="Mô tả đóng gói" style="width: 5%"></Column>
                 <Column field="chemicalClass" header="Phân loại hóa chất" style="width: 20%"></Column>
-                <Column field="chemicalClassInfo" header="Phân loại hóa chất" style="width: 10%"></Column>
+                <Column field="chemicalClassInfo" header="Phân loại chi tiết" style="width: 10%"></Column>
                 <!-- <Column field="position" header="Vị trí" style="width: 10%"></Column> -->
                 <!-- <Column field="expiredDate" header="Hạn dụng" style="width: 10%"></Column> -->
                 <!-- <Column field="impExpInfo" header="Tình trạng hóa chất" style="width: 10%"></Column> -->

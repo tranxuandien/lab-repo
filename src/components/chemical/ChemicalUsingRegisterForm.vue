@@ -33,34 +33,30 @@
                     <tr>
                         <th>Tên hóa chất</th>
                         <th>Hãng sản xuất</th>
-                        <th>Dạng hóa chất</th>
-                        <th>Khối lượng đăng kí</th>
                         <th>Khối lượng còn lại</th>
-                        <th>Mô tả lọ đựng</th>
-                        <th>Hóa chất SHPT</th>
-                        <th>Thông tin người nhập</th>
+                        <th>Dạng hóa chất</th>
+                        <th>Mô tả đóng gói</th>
+                        <th>Phân loại HC</th>
+                        <th>Phân loại chi tiết</th>
                         <th>Vị trí</th>
-                        <th>Trạng thái nhập xuất</th>
                         <th>Tình trạng hóa chất</th>
-                        <th>Nguồn</th>
                         <th>Khác</th>
+                        <th>Thông tin người nhập</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-if="chemical">
                         <td>{{ chemical.name }}</td>
                         <td>{{ chemical.brand }}</td>
-                        <td>{{ chemical.chemicalType }}</td>
-                        <td>{{ chemical.quantity }}</td>
                         <td>{{ chemical.remain }}</td>
-                        <td>{{ chemical.description }}</td>
-                        <td>{{ chemical.chemicalShpt }}</td>
-                        <td>{{ chemical.registerUser }}</td>
+                        <td>{{ chemical.chemicalType }}</td>
+                        <td>{{ chemical.chemicalTypeInfo }}</td>
+                        <td>{{ chemical.chemicalClass }}</td>
+                        <td>{{ chemical.chemicalClassInfo }}</td>
                         <td>{{ chemical.position }}</td>
                         <td>{{ chemical.chemicalStatus }}</td>
-                        <td>{{ chemical.chemicalStatus }}</td>
-                        <td>{{ chemical.purchaseSrc }}</td>
                         <td>{{ chemical.otherInfo }}</td>
+                        <td>{{ chemical.registerUser }}</td>
                     </tr>
                 </tbody>
             </table>

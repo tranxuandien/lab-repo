@@ -8,8 +8,8 @@
           </TextElement>
         </GroupElement>
         <GroupElement name="importInfo" label="Thông tin nhập hóa chất">
-          <TextElement id="quantity" name="manufactoryQuantity" placeholder="K/lượng,Thể tích" :columns="2" rules="required"
-            :messages="{ required: 'Nhập lượng hóa chất' }" :mask="{
+          <TextElement id="quantity" name="manufactoryQuantity" placeholder="K/lượng,Thể tích" :columns="2"
+            rules="required" :messages="{ required: 'Nhập lượng hóa chất' }" :mask="{
               mask: 'number',
               thousandsSeparator: '',     // any single char
               scale: 2,                   // digits after fractional delimiter, 0 for integers
@@ -37,42 +37,37 @@
       </Vueform>
     </div>
     <div v-if="chemical">
-      <table class="table table-bordered table-striped table-hover">
-        <thead class="thead-dark">
-          <tr>
-            <th>Tên hóa chất</th>
-            <th>Hãng sản xuất</th>
-            <th>Dạng hóa chất</th>
-            <th>Khối lượng đăng kí</th>
-            <th>Khối lượng còn lại</th>
-            <th>Mô tả lọ đựng</th>
-            <th>Hóa chất SHPT</th>
-            <th>Thông tin người nhập</th>
-            <th>Vị trí</th>
-            <th>Trạng thái nhập xuất</th>
-            <th>Tình trạng hóa chất</th>
-            <th>Nguồn</th>
-            <th>Khác</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-if="chemical">
-            <td>{{ chemical.name }}</td>
-            <td>{{ chemical.brand }}</td>
-            <td>{{ chemical.chemicalType }}</td>
-            <td>{{ chemical.quantity }}</td>
-            <td>{{ chemical.remain }}</td>
-            <td>{{ chemical.description }}</td>
-            <td>{{ chemical.chemicalShpt }}</td>
-            <td>{{ chemical.registerUser }}</td>
-            <td>{{ chemical.position }}</td>
-            <td>{{ chemical.chemicalStatus }}</td>
-            <td>{{ chemical.chemicalStatus }}</td>
-            <td>{{ chemical.purchaseSrc }}</td>
-            <td>{{ chemical.otherInfo }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div>
+        <h6>Thông tin hóa chất</h6>
+      </div>
+      <div>
+        <table class="table table-bordered table-striped table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th>Tên hóa chất</th>
+              <th>Hãng sản xuất</th>
+              <th>Dạng hóa chất</th>
+              <th>Mô tả đóng gói</th>
+              <th>Phân loại hóa chất</th>
+              <th>Phân loại chi tiết</th>
+              <th>Người đăng ký HC</th>
+              <th>Thông tin khác</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-if="chemical">
+              <td>{{ chemical.name }}</td>
+              <td>{{ chemical.brand }}</td>
+              <td>{{ chemical.chemicalType }}</td>
+              <td>{{ chemical.chemicalTypeInfo }}</td>
+              <td>{{ chemical.chemicalClass }}</td>
+              <td>{{ chemical.chemicalClassInfo }}</td>
+              <td>{{ chemical.registerUser }}</td>
+              <td>{{ chemical.otherInfo }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>
