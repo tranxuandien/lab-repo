@@ -1,7 +1,7 @@
 <template>
     <div class="container mt-6">
         <div v-if="chemicals" class="card">
-            <DataTable :value="chemicals" showGridlines=true paginator :rows="5" :rowsPerPageOptions="[5, 10, 20, 50]"
+            <DataTable :value="chemicals" showGridlines paginator :rows="5" :rowsPerPageOptions="[5, 10, 20, 50]"
                 tableStyle="min-width: 50rem"
                 paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
                 currentPageReportTemplate="{first} to {last} of {totalRecords}">
