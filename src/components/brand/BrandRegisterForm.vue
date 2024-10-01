@@ -1,10 +1,10 @@
 <template>
     <Vueform :endpoint="false" @submit="submitForm" name="registerForm">
-        <GroupElement name="brandInformation" label="Thông tin nơi sản xuất">
+        <GroupElement name="brandInformation" >
             <TextElement name="name" rules="required" :messages="{ required: 'Nhập tên nơi sản xuất' }"
                 placeholder="Nơi sản xuất" :columns="6" />
         </GroupElement>
-        <ButtonElement name="submit" add-class="mt-2" submits>
+        <ButtonElement style="padding-left:4% ;" name="submit" add-class="mt-2" submits>
             Đăng kí nơi sản xuất
         </ButtonElement>
     </Vueform>

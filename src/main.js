@@ -19,7 +19,7 @@ app.use(Router);
 app.use(Vueform, vueformConfig);
 app.use(Vue3Toastify,
   {
-    autoClose: 3000,
+    autoClose: 4000,
     // ...
   })
 app.use(createPinia())

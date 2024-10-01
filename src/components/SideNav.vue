@@ -44,7 +44,7 @@ export default {
 </script>
 <style scoped>
 .custom-sidenav {
-  height: 100vh;
+  height: 81.7vh;
   background-color: #343a40;
   color: white;
   padding: 20px;

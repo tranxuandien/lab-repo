@@ -1,12 +1,12 @@
 <template>
     <Vueform :endpoint="false" @submit="submitForm" name="registerForm">
-        <GroupElement name="positionInformation" label="Thông tin nơi đặt hóa chất">
+        <GroupElement name="positionInformation" >
             <TextElement name="lab" rules="required" :messages="{ required: 'Nhập tên phòng thí nghiệm' }"
                 placeholder="Tên phòng thí nghiệm" :columns="3" />
             <TextElement name="room" placeholder="Tên phòng chứa HC" :columns="3" />
             <TextElement name="ray" placeholder="Tủ đặt hóa chất" :columns="3" />
         </GroupElement>
-        <ButtonElement name="submit" add-class="mt-2" submits>
+        <ButtonElement style="padding-left:26% ;" name="submit" add-class="mt-2" submits>
             Đăng kí nơi đặt hóa chất
         </ButtonElement>
     </Vueform>
