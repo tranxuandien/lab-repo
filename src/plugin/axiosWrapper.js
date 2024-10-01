@@ -56,10 +56,16 @@ function authHeader(url) {
 async function handleResponse(response) {
     // const isJson = response.headers?.get('content-type')?.includes('application/json');
     const data = response.data;
-    if (data.message) {
+    if ([201].includes(response.status)) {
         toast.success(data.message, {
             position: toast.POSITION.TOP_CENTER,
         });
+    } else {
+        if (data.message) {
+            toast.info(data.message, {
+                position: toast.POSITION.TOP_CENTER,
+            });
+        }
     }
     return data;
 }
@@ -72,8 +78,8 @@ function handleResponseError(error) {
     const { user, logout } = useAuthStore();
     // console.log(user)
     if ([401, 403].includes(error.status) && user) {
-    // auto logout if 401 Unauthorized or 403 Forbidden response returned from api
-    logout();
+        // auto logout if 401 Unauthorized or 403 Forbidden response returned from api
+        logout();
     }
 
     // get error message from body or default to response status

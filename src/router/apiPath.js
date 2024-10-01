@@ -16,7 +16,7 @@ export const API_PATH = {
         USING_GET: "api/v1/chemical/using/get",
         USING: "api/v1/chemical/using",
         //Inventory
-        INVENTORY_LIST:"api/v1/admin/chemical/inventory/list",
+        INVENTORY_LIST: "api/v1/admin/chemical/inventory/list",
         //History
         HISTORY: "api/v1/chemical/impexp/list",
         HISTORY_CHART: "api/v1/chemical/impexp/chart/list",
@@ -35,6 +35,14 @@ export const API_PATH = {
         LOGIN: "api/auth/login",
         LOGOUT: "api/auth/logout",
     },
-    BRAND: "api/v1/brand",
-    POSITION: "api/v1/position",
+    BRAND: {
+        LIST_MASTER: "api/v1/brand",
+        DELETE: "api/v1/admin/brand/delete",
+        ADD: "api/v1/admin/brand/add"
+    },
+    POSITION: {
+        LIST_MASTER: "api/v1/position",
+        DELETE: "api/v1/admin/position/delete",
+        ADD: "api/v1/admin/position/add"
+    },
 }

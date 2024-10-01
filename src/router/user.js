@@ -7,14 +7,16 @@ import ChemicalUsingRegisterPage from '@/views/user/chemical/ChemicalUsingRegist
 import ChemicalManagerPage from '@/views/user/chemical/ChemicalManagerPage.vue'
 import ChemicalUsingHistoryPage from '@/views/user/chemical/ChemicalUsingHistoryPage.vue'
 import ChemicalUpdatePage from '@/views/user/chemical/ChemicalUpdatePage.vue'
+import BrandRegisterPage from '@/views/user/brand/BrandRegisterPage.vue'
+import PositionRegisterPage from '@/views/user/position/PositionRegisterPage.vue'
 import { useAuthStore } from '@/stores/auth';
 
 export default {
     path: '/user',
     component: Layout,
     // eslint-disable-next-line
-    beforeEnter: (to,from)=>{
-        const {isLogIn} = useAuthStore();
+    beforeEnter: (to, from) => {
+        const { isLogIn } = useAuthStore();
         return isLogIn();
     },
     children: [
@@ -57,6 +59,26 @@ export default {
             path: 'chemical/using/history',
             name: 'chemicalUsingHistoryPage',
             component: ChemicalUsingHistoryPage
+        },
+        {
+            path: 'brand',
+            children: [
+                {
+                    path: 'register',
+                    name: 'BrandRegisterPage',
+                    component: BrandRegisterPage
+                },
+            ]
+        },
+        {
+            path: 'position',
+            children: [
+                {
+                    path: 'register',
+                    name: 'PositionRegisterPage',
+                    component: PositionRegisterPage
+                },
+            ]
         },
     ]
 }

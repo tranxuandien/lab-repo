@@ -93,7 +93,7 @@ export default {
     },
     methods: {
         async getAllBrand() {
-            this.brandList = await axiosWrapper.get(API_PATH.BRAND);
+            this.brandList = await axiosWrapper.get(API_PATH.BRAND.LIST_MASTER);
         }
         ,
         async submitForm(form$) {

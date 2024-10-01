@@ -10,9 +10,9 @@
       <li v-if="isShowUser"><router-link to="/user/chemical/using/register">Đăng ký sử dụng hóa
           chất</router-link></li>
       <li v-if="isShow"><router-link to="/user/chemical/manager">Kiểm tra tình trạng HC</router-link></li>
-      <li ><router-link to="/user/chemical/using/history">Lịch sử sử dụng HC</router-link></li>
-      
-      <!-- <li><router-link to="/checkin">Thông tin checkin</router-link></li>  -->
+      <li><router-link to="/user/chemical/using/history">Lịch sử sử dụng HC</router-link></li>
+      <li v-if="isShow"><router-link to="/user/brand/register">Đăng kí nơi sản xuất</router-link></li>
+      <li v-if="isShow"><router-link to="/user/position/register">Đăng kí vị trí đặt HC</router-link></li>
       <li><router-link to="/about">Giới thiệu</router-link></li>
     </ul>
   </aside>

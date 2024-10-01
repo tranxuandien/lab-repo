@@ -111,7 +111,7 @@ export default {
       });
     },
     async getAllPosition() {
-      this.positionLst = await axiosWrapper.get(API_PATH.POSITION);
+      this.positionLst = await axiosWrapper.get(API_PATH.POSITION.LIST_MASTER);
     }
   },
   mounted() {

@@ -52,11 +52,11 @@ export default {
     },
     methods: {
         async getAllBrand() {
-            this.brandList = await axiosWrapper.get(API_PATH.BRAND);
+            this.brandList = await axiosWrapper.get(API_PATH.BRAND.LIST_MASTER);
         }
         ,
         async getAllPosition() {
-            this.positionLst = await axiosWrapper.get(API_PATH.POSITION);
+            this.positionLst = await axiosWrapper.get(API_PATH.POSITION.LIST_MASTER);
         },
         async doSearch(form$) {
             const data = form$.data;
