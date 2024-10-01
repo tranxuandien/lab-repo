@@ -18,7 +18,7 @@
             <Dialog v-model:visible="deleteBrandDialog" :style="{ width: '450px' }" header="Xác nhận" :modal="true">
                 <div class="flex items-center gap-4">
                     <i class="pi pi-exclamation-triangle !text-3xl"></i>
-                    <span v-if="brand">Bạn chắc chắn muốn xóa thông tin xuất xứ: <b>{{ brand.name }}</b>?</span>
+                    <span v-if="brand">Bạn chắc chắn muốn xóa thông tin nơi sản xuất: <b>{{ brand.name }}</b>?</span>
                 </div>
                 <template #footer>
                     <Button label="Không" icon="pi pi-times" text @click="deleteBrandDialog = false" />
