@@ -41,7 +41,7 @@ export default {
         async print(form$) {
             const data = form$.data
             form$.submitting = true
-            await axiosWrapper.get(API_PATH.CHEMICAL.PRINT + '?chemicalName=' + data.chemical.chemicalName + '&chemicalId=' + data.chemical.id + '&number=' + data.printNumber, null, true)
+            await axiosWrapper.get(API_PATH.CHEMICAL.PRINT + '?chemicalName=' + data.chemical.chemicalName + '&chemicalId=' + data.chemical.id + '&number=' + data.printNumber, null, true,data.chemical.chemicalName)
                 .finally(() => {
                     form$.submitting = false
                 })

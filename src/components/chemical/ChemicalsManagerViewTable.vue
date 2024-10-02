@@ -114,7 +114,7 @@ export default {
         },
         async confirmRePrintChemicalBarCode(item) {
             console.log(item)
-            await axiosWrapper.get(API_PATH.CHEMICAL.RE_PRINT + '?chemicalName=' + item.originName + '&barcode=' + item.barcode, null, true)
+            await axiosWrapper.get(API_PATH.CHEMICAL.RE_PRINT + '?chemicalName=' + item.originName + '&barcode=' + item.barcode, null, true,item.originName)
                 .finally(() => {
                 })
         }
