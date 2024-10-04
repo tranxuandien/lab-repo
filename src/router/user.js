@@ -9,6 +9,8 @@ import ChemicalUsingHistoryPage from '@/views/user/chemical/ChemicalUsingHistory
 import ChemicalUpdatePage from '@/views/user/chemical/ChemicalUpdatePage.vue'
 import BrandRegisterPage from '@/views/user/brand/BrandRegisterPage.vue'
 import PositionRegisterPage from '@/views/user/position/PositionRegisterPage.vue'
+import DevicePage from '@/views/user/device/DevicePage.vue'
+import DeviceRegisterPage from '@/views/user/device/DeviceRegisterPage.vue'
 import { useAuthStore } from '@/stores/auth';
 
 export default {
@@ -79,6 +81,16 @@ export default {
                     component: PositionRegisterPage
                 },
             ]
+        },
+        {
+            path: 'device',
+            name: 'device',
+            component: DevicePage
+        }, 
+        {
+            path: 'device/register',
+            name: 'deviceRegister',
+            component: DeviceRegisterPage
         },
     ]
 }

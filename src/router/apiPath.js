@@ -45,4 +45,8 @@ export const API_PATH = {
         DELETE: "api/v1/admin/position/delete",
         ADD: "api/v1/admin/position/add"
     },
+    DEVICE: {
+        LIST: "api/v1/device/list",
+        ADD: "api/v1/admin/device/add",
+    }
 }

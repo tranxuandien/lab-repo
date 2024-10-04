@@ -57,6 +57,13 @@ export default {
                             { key: '2-1',icon:"pi pi-history", label: 'Lịch sử sử dụng HC', data: '/user/chemical/using/history', type: 'url' },
                         ]
                     },
+                    {
+                        key: '5',
+                        label: 'Thiết bị',
+                        children: [
+                            { key: '5-0',icon:"pi pi-list", label: 'Danh sách thiết bị', data: '/user/device', type: 'url' },
+                        ]
+                    },
                 );
             }
 
@@ -66,6 +73,9 @@ export default {
                     { key: '1-2',icon:"pi pi-print", label: 'In tem hóa chất', data: '/user/chemical/barcode/print', type: 'url' },
                     { key: '1-3',icon:"pi pi-file-import", label: 'Đăng kí nhập hóa chất', data: '/user/chemical/import/register', type: 'url' },
                     { key: '1-4',icon:"pi pi-wave-pulse", label: 'Kiểm tra tình trạng HC', data: '/user/chemical/manager', type: 'url' },
+                );
+                this.nodes[3].children.push(
+                    { key: '5-1',icon:"pi pi-address-book", label: 'Đăng kí thiết bị', data: '/user/device/register', type: 'url' },
                 );
                 this.nodes.push(
                     {
