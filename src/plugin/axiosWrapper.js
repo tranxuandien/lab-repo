@@ -14,7 +14,7 @@ const fetch = axios.create({
 });
 
 function request(method) {
-    return async (url, data, isDownloadFile,fileName) => {
+    return async (url, data, isDownloadFile) => {
         url = process.env.VUE_APP_BASE_URL + url;
         const requestOptions = {
             method,
@@ -30,7 +30,7 @@ function request(method) {
         if (isDownloadFile) {
             requestOptions.responseType = 'blob'
             return await fetch(url, requestOptions).then((res) => {
-                saveFile(res.data,fileName);
+                saveFile(res.data);
             }).catch(handleResponseError);
         } else {
             return await fetch(url, requestOptions).then(handleResponse).catch(handleResponseError);
@@ -87,13 +87,13 @@ function handleResponseError(error) {
     // return Promise.reject(error);
 }
 
-function saveFile(val,chemical) {
+function saveFile(val) {
     console.log(val);
     const url = window.URL.createObjectURL(new Blob([val], { type: "application/pdf" }));
     const tempLink = document.createElement('a');
     tempLink.href = url;
     tempLink.setAttribute('download',
-        chemical+`_`+new Date().toLocaleTimeString()+` `+new Date().toLocaleDateString()+`.pdf`);
+        `Chemical_barcode_`+new Date().toLocaleTimeString()+` `+new Date().toLocaleDateString()+`.pdf`);
     document.body.appendChild(tempLink);
     tempLink.click();
     document.body.removeChild(tempLink);
