@@ -10,7 +10,7 @@ export const useAuthStore = defineStore({
     state: () => ({
         // initialize state from local storage to enable user to stay logged in
         user: JSON.parse(localStorage.getItem('user')),
-        returnUrl: '/user/chemical'
+        returnUrl: '/'
     }),
     actions: {
         async login(username, password) {

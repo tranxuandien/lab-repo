@@ -1,74 +1,109 @@
 <template>
-  <aside class="custom-sidenav">
-    <ul>
-      <li><router-link to="/">Trang chủ</router-link></li>
-      <li v-if="isShowUser"><router-link to="/user/chemical">Hóa chất</router-link></li>
-      <li v-if="isShow"><router-link to="/user/chemical/register">Đăng kí hóa chất</router-link></li>
-      <li v-if="isShow"><router-link to="/user/chemical/barcode/print">In tem hóa
-          chất</router-link></li>
-      <li v-if="isShow"><router-link to="/user/chemical/import/register">Đăng kí nhập hóa chất</router-link></li>
-      <li v-if="isShowUser"><router-link to="/user/chemical/using/register">Đăng ký sử dụng hóa
-          chất</router-link></li>
-      <li v-if="isShow"><router-link to="/user/chemical/manager">Kiểm tra tình trạng HC</router-link></li>
-      <li><router-link to="/user/chemical/using/history">Lịch sử sử dụng HC</router-link></li>
-      <li v-if="isShow"><router-link to="/user/brand/register">Đăng kí nơi sản xuất</router-link></li>
-      <li v-if="isShow"><router-link to="/user/position/register">Đăng kí vị trí đặt HC</router-link></li>
-      <li><router-link to="/about">Giới thiệu</router-link></li>
-    </ul>
-  </aside>
+    <div class=" custom-sidenav">
+        <Tree :value="nodes" class="w-full md:w-[30rem]">
+            <template #default="slotProps">
+                <b>{{ slotProps.node.label }}</b>
+            </template>
+            <template #url="slotProps">
+                <div>
+                    <router-link :to="slotProps.node.data" rel="noopener noreferrer"
+                        class="text-surface-700 dark:text-surface-0 hover:text-primary">{{ slotProps.node.label
+                        }}</router-link>
+                </div>
+            </template>
+        </Tree>
+    </div>
 </template>
+
 <script>
+import Tree from 'primevue/tree';
 import { useAuthStore } from '@/stores/auth';
 
-
 export default {
-  data() {
-    return {
-      isShow: false,
-      isShowUser: false
+    components: {
+        Tree
+    },
+    data() {
+        return {
+            nodes: [
+                {
+                    key: '0',
+                    label: 'Trang chủ',
+                    data: "/",
+                    type: 'url',
+                    style: "font-weight: bolder;"
+                },
+
+            ],
+        };
+    },
+    methods: {
+        showSideNav() {
+            const { hasRoleAdmin, isLogIn } = useAuthStore();
+            if (isLogIn()) {
+                this.nodes.push(
+                    {
+                        key: '1',
+                        label: 'Hóa chất',
+                        children: [
+                            { key: '1-0',icon:"pi pi-list", label: 'Danh sách hóa chất', data: '/user/chemical', type: 'url' },
+                        ]
+                    },
+                    {
+                        key: '2',
+                        label: 'Sử dụng hóa chất',
+                        children: [
+                            { key: '2-0',icon:"pi pi-filter", label: 'Đăng ký sử dụng hóa chất', data: '/user/chemical/using/register', type: 'url' },
+                            { key: '2-1',icon:"pi pi-history", label: 'Lịch sử sử dụng HC', data: '/user/chemical/using/history', type: 'url' },
+                        ]
+                    },
+                );
+            }
+
+            if (hasRoleAdmin() && isLogIn()) {
+                this.nodes[1].children.push(
+                    { key: '1-1',icon:"pi pi-address-book", label: 'Đăng kí hóa chất', data: '/user/chemical/register', type: 'url' },
+                    { key: '1-2',icon:"pi pi-print", label: 'In tem hóa chất', data: '/user/chemical/barcode/print', type: 'url' },
+                    { key: '1-3',icon:"pi pi-file-import", label: 'Đăng kí nhập hóa chất', data: '/user/chemical/import/register', type: 'url' },
+                    { key: '1-4',icon:"pi pi-wave-pulse", label: 'Kiểm tra tình trạng HC', data: '/user/chemical/manager', type: 'url' },
+                );
+                this.nodes.push(
+                    {
+                        key: '3',
+                        label: 'Nơi sản xuất',
+                        // type: 'url',
+                        children: [
+                            { key: '3-0',icon:"pi pi-building-columns", label: 'Đăng kí nơi sản xuất', data: '/user/brand/register', type: 'url' },
+                        ]
+                    },
+                    {
+                        key: '4',
+                        label: 'Nơi đặt hóa chất',
+                        // type: 'url',
+                        children: [
+                            { key: '1-0',icon:"pi pi-bars",label: 'Đăng kí vị trí đặt HC', data: '/user/position/register', type: 'url' },
+                        ]
+                    },
+                );
+            }
+        }
+    },
+    mounted() {
+        // eslint-disable-next-line
+        this.showSideNav();
+        // this.user = user;
     }
-  },
-  methods: {
-    checkIsShow() {
-      const { hasRoleAdmin, isLogIn } = useAuthStore();
-      this.isShow = hasRoleAdmin() && isLogIn();
-      this.isShowUser = isLogIn();
-    }
-  },
-  mounted() {
-    // eslint-disable-next-line
-    this.checkIsShow();
-    // this.user = user;
-  }
-}
+};
 </script>
-<style scoped>
+<style>
 .custom-sidenav {
-  height: 81.7vh;
-  background-color: #343a40;
-  color: white;
-  padding: 20px;
-  /* position: fixed;
+    height: 81.7vh;
+    /* background-color: #343a40; */
+    color: white;
+    padding: 20px;
+    /* position: fixed;
   top: 0;
   left: 0; */
-  overflow-y: auto;
-}
-
-.custom-sidenav ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.custom-sidenav ul li {
-  margin: 15px 0;
-}
-
-.custom-sidenav ul li a {
-  color: white;
-  text-decoration: none;
-}
-
-.custom-sidenav ul li a:hover {
-  text-decoration: underline;
+    /* overflow-y: auto; */
 }
 </style>
