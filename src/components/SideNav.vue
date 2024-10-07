@@ -62,6 +62,7 @@ export default {
                         label: 'Thiết bị',
                         children: [
                             { key: '5-0',icon:"pi pi-list", label: 'Danh sách thiết bị', data: '/user/device', type: 'url' },
+                            { key: '5-2',icon:"pi pi-list", label: 'Đăng ký sử dụng thiết bị', data: '/user/device/using/register', type: 'url' },
                         ]
                     },
                 );

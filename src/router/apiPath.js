@@ -46,7 +46,11 @@ export const API_PATH = {
         ADD: "api/v1/admin/position/add"
     },
     DEVICE: {
+        LIST_MASTER: "api/v1/device/list/master",
         LIST: "api/v1/device/list",
         ADD: "api/v1/admin/device/add",
+
+        USING: "api/v1/device/using",
+        USING_LIST: "api/v1/device/using/list"
     }
 }

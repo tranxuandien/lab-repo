@@ -11,6 +11,7 @@ import BrandRegisterPage from '@/views/user/brand/BrandRegisterPage.vue'
 import PositionRegisterPage from '@/views/user/position/PositionRegisterPage.vue'
 import DevicePage from '@/views/user/device/DevicePage.vue'
 import DeviceRegisterPage from '@/views/user/device/DeviceRegisterPage.vue'
+import DeviceUsingRegisterPage from '@/views/user/device/DeviceUsingRegisterPage.vue';
 import { useAuthStore } from '@/stores/auth';
 
 export default {
@@ -91,6 +92,11 @@ export default {
             path: 'device/register',
             name: 'deviceRegister',
             component: DeviceRegisterPage
+        },
+        {
+            path: 'device/using/register',
+            name: 'deviceUsingRegister',
+            component: DeviceUsingRegisterPage
         },
     ]
 }

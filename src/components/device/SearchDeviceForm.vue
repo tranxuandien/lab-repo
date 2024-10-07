@@ -3,7 +3,7 @@
         <Vueform :endpoint="false" @submit="doSearch" name="searchDeviceForm">
             <GroupElement name="group1" :columns="{ container: 12, label: 4, wrapper: 12 }">
                 <TextElement name="name" placeholder="Tên thiết bị" :columns="6" />
-                <SelectElement :search="true" name="position" label-prop="positionInfo" value-prop="id"
+                <SelectElement :search="true" name="positionId" label-prop="positionInfo" value-prop="id"
                     :items="positionLst" placeholder="Vị trí đặt thiết bị" :columns="2" />
             </GroupElement>
             <ButtonElement name="submit" add-class="md-2 btn-search" submits>
