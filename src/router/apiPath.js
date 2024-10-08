@@ -55,5 +55,9 @@ export const API_PATH = {
         FOR_DEVICE: "api/v1/device/using/user?deviceId=",
         CANCEL_USING: "api/v1/device/using/cancel/",
         DONE_USING: "api/v1/device/using/done/",
+
+        REPORT_STATUS:"api/v1/device/using/report",
+        ACTIVE:"api/v1/admin/device/active?id=",
+        DELETE:"api/v1/admin/device/delete",
     }
 }

@@ -6,7 +6,7 @@
                 <SelectElement :search="true" name="positionId" label-prop="positionInfo" value-prop="id"
                     :items="positionLst" placeholder="Vị trí đặt thiết bị" :columns="2" />
             </GroupElement>
-            <ButtonElement name="submit" add-class="md-2 btn-search" submits>
+            <ButtonElement id="searchDeviceBtn" name="submit" add-class="md-2 btn-search" submits>
                 Tìm kiếm
             </ButtonElement>
         </Vueform>

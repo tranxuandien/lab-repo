@@ -6,6 +6,7 @@
             </template>
             <template #url="slotProps">
                 <div>
+                    <img v-if="slotProps.node.label=='Đăng kí thông tin thiết bị'" src="@/assets/icons/machine.png" style="width:16px;height:16px;float: left;margin-top: 5px;">
                     <router-link :to="slotProps.node.data" rel="noopener noreferrer"
                         class="text-surface-700 dark:text-surface-0 hover:text-primary">{{ slotProps.node.label
                         }}</router-link>
@@ -62,7 +63,7 @@ export default {
                         label: 'Thiết bị',
                         children: [
                             { key: '5-0',icon:"pi pi-list", label: 'Danh sách thiết bị', data: '/user/device', type: 'url' },
-                            { key: '5-2',icon:"pi pi-list", label: 'Đăng ký sử dụng thiết bị', data: '/user/device/using/register', type: 'url' },
+                            { key: '5-2',icon:"pi pi-spin pi-cog", label: 'Đăng ký sử dụng thiết bị', data: '/user/device/using/register', type: 'url' },
                         ]
                     },
                 );
@@ -76,7 +77,7 @@ export default {
                     { key: '1-4',icon:"pi pi-wave-pulse", label: 'Kiểm tra tình trạng HC', data: '/user/chemical/manager', type: 'url' },
                 );
                 this.nodes[3].children.push(
-                    { key: '5-1',icon:"pi pi-address-book", label: 'Đăng kí thiết bị', data: '/user/device/register', type: 'url' },
+                    { key: '5-1', label: 'Đăng kí thông tin thiết bị', data: '/user/device/register', type: 'url' },
                 );
                 this.nodes.push(
                     {
