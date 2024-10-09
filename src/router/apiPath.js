@@ -25,7 +25,7 @@ export const API_PATH = {
         INVENTORY_DELETE: "api/v1/admin/chemical/inventory/delete",
     },
     USER: {
-        LIST_MASTER: "api/v1/admin/user/master/list",
+        LIST_MASTER: "api/v1/user/master/list",
     },
     ACCOUNT: {
         USER_REGISTER: "api/auth/register",
