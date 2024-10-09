@@ -16,11 +16,36 @@
                         :messages="{ required: 'Chọn thời gian kết thúc sử dụng' }" />
                 </GroupElement>
                 <GroupElement name="gr2">
+                    <CheckboxElement name="centrifuge" :default="false" @change="setDefaultSpeed">
+                        Đăng ký máy ly tâm
+                    </CheckboxElement>
+                    <TextElement name="centrifugeSpeed" :native="false" :columns="2" placeholder="Tốc độ máy ly tâm"
+                        rules="required" :messages="{ required: 'Điền tốc độ máy ly tâm' }"
+                        :conditions="[['gr2.centrifuge', true]]" :mask="{
+                            mask: 'number',
+                            thousandsSeparator: '',     // any single char
+                            scale: 0,                   // digits after fractional delimiter, 0 for integers
+                            padFractionalZeros: false,  // pads zeros at end to the length of scale
+                            normalizeZeros: true,       // removes zeros at ends (eg. 1,10 -> 1,1)
+                            radix: '.',                 // fractional delimiter
+                            mapToRadix: ['.'],          // symbols to process as radix
+                            min: 1000,                // minimum allowed value
+                            max: 18000,                 // maximum allowed value
+                            autofix: true,              // replace with min/max value if outside of range
+                        }" />
                     <CheckboxElement name="deviceStatus" :default="true">
                         Trạng thái thiết bị lúc đăng ký là bình thường
                     </CheckboxElement>
-                    <TextElement name="info" :native="false" :columns="2" placeholder="Mô tả khác" rules="required"
-                        :messages="{ required: 'Điền trạng thái thiết bị' }" />
+                    <TextElement name="info" :native="false" :columns="2" placeholder="Mô tả bất thường"
+                        rules="required" :messages="{ required: 'Điền trạng thái thiết bị' }"
+                        :conditions="[['gr2.deviceStatus', false]]" />
+                </GroupElement>
+                <GroupElement name="gr3">
+                    <MultiselectElement :search="true" label-prop="userName" value-prop="id" name="user" :native="true"
+                        :items="userList" placeholder="Chọn người dùng"
+                        :columns="{ container: 3, label: 4, wrapper: 12 }" />
+                    <TextElement name="expect" :native="false" :columns="2" placeholder="Mục đích sử dụng"
+                        rules="required" :messages="{ required: 'Điền mục đích sử dụng thiết bị' }" />
                 </GroupElement>
                 <ButtonElement :disabled="false" submits name="submit" add-class="mt-2 btn-import">
                     Đăng kí sử dụng
@@ -79,36 +104,40 @@
                             {{ slotProps.data.end.replaceAll('-', '/').replaceAll('T', ' ') }}
                         </template>
                     </Column>
-                    <Column sortable field="user" header="Người đăng ký sử dụng" style="width: 5%"></Column>
                     <Column sortable field="registerStatus" header="Trạng thái đăng ký" style="width: 5%"></Column>
+                    <Column sortable field="centrifugeSpeed" header="Tốc độ ly tâm" style="width: 5%"></Column>
+                    <Column sortable field="expect" header="Mục đích sử dụng" style="width: 5%"></Column>
+                    <Column sortable field="user" header="Người đăng ký chính" style="width: 5%"></Column>
+                    <Column sortable field="users" header="Người sử dụng" style="width: 5%"></Column>
                     <Column sortable :exportable="false" style="min-width: 12rem;width: 5%;" header="Cập nhật">
                         <template #body="slotProps">
                             <Button v-if="slotProps.data.registerStatus === 'Đăng ký'" icon="pi pi-pencil" outlined
                                 rounded class="mr-2" @click="confirmDoneUsingDevice(slotProps.data)"></Button>
-                            <Button v-if="slotProps.data.registerStatus === 'Đăng ký'" icon="pi pi-trash" outlined
-                                rounded severity="danger" @click="confirmCancelUsingDevice(slotProps.data)"></Button>
-                            <Button v-if="slotProps.data.registerStatus === 'Đăng ký'" icon="pi pi-trash" outlined
-                                rounded severity="warning" @click="confirmReportDeviceStatus(slotProps.data)"></Button>
+                            <Button v-if="slotProps.data.registerStatus === 'Đăng ký'" icon="pi pi-times-circle"
+                                outlined rounded severity="danger"
+                                @click="confirmCancelUsingDevice(slotProps.data)"></Button>
+                            <Button v-if="slotProps.data.registerStatus === 'Đăng ký'" icon="pi pi-exclamation-triangle"
+                                outlined rounded severity="warn"
+                                @click="confirmReportDeviceStatus(slotProps.data)"></Button>
                         </template>
                     </Column>
                 </DataTable>
-                <Dialog v-model:visible="cancelUsingDeviceDialog" :style="{ width: '450px' }" header="Xác nhận"
+                <Dialog v-model:visible="cancelUsingDeviceDialog" :style="{ width: '550px' }" header="Xác nhận"
                     :modal="true">
                     <div class="flex items-center gap-4">
-                        <i class="pi pi-exclamation-triangle !text-3xl"></i>
                         <span v-if="device">Bạn chắc chắn muốn hủy đăng ký sử dụng thiết bị: <b>{{ device.device
                                 }}</b>?</span>
                     </div>
                     <template #footer>
                         <Button label="Không" icon="pi pi-times" text @click="cancelUsingDeviceDialog = false" />
-                        <Button label="Hủy đăng ký sử dụng" icon="pi pi-check" @click="cancelUsingDevice" />
+                        <Button label="Hủy đăng ký sử dụng" severity="danger" icon="pi pi-check"
+                            @click="cancelUsingDevice" />
                     </template>
                 </Dialog>
 
                 <Dialog v-model:visible="doneUsingDeviceDialog" :style="{ width: '450px' }" header="Xác nhận"
                     :modal="true">
                     <div class="flex items-center gap-4">
-                        <i class="pi pi-exclamation-triangle !text-3xl"></i>
                         <span v-if="device">Bạn đã sử dụng xong thiết bị: <b>{{ device.device
                                 }}</b>?</span>
                     </div>
@@ -119,7 +148,7 @@
                 </Dialog>
 
                 <Dialog v-model:visible="reportDeviceStatusDialog" modal header="Cập nhật trạng thái thiết bị"
-                    :style="{ width: '25rem' }">
+                    :style="{ width: '40rem' }">
                     <span class="text-surface-500 dark:text-surface-400 block mb-8">Điển thông tin tình trạng thiết bị
                         trong quá
                         trình sử dụng.</span>
@@ -128,14 +157,11 @@
                             <TextElement name="deviceStatusDetail" :native="false" :columns="12"
                                 placeholder="Trạng thái bất thường của thiết bị" rules="required"
                                 :messages="{ required: 'Điền trạng thái thiết bị' }" />
-                                <TextElement name="id" :native="false" hidden="true"/>
+                            <TextElement name="id" :native="false" hidden="true" />
                         </GroupElement>
-                        <ButtonElement :disabled="false" submits name="submit" add-class="mt-2 btn-import">
+                        <ButtonElement :disabled="false" submits name="submit" button-class="report-btn">
                             Báo cáo tình trạng thiết bị
                         </ButtonElement>
-                        <!-- <ButtonElement @click="reportDeviceStatusDialog=false" submits name="submit" add-class="mt-2 btn-import">
-                            Hủy
-                        </ButtonElement> -->
                     </Vueform>
                 </Dialog>
             </div>
@@ -166,7 +192,8 @@ export default {
             usingUserList: null,
             cancelUsingDeviceDialog: false,
             doneUsingDeviceDialog: false,
-            reportDeviceStatusDialog: false
+            reportDeviceStatusDialog: false,
+            userList: null
         }
     },
     methods: {
@@ -194,12 +221,15 @@ export default {
         async deviceUsing(form$) {
             const data = form$.data
             form$.submitting = true
-            await axiosWrapper.post(API_PATH.DEVICE.USING, data).finally(() => {
+            console.log(data)
+            await axiosWrapper.post(API_PATH.DEVICE.USING, data).then((res) => {
+                if (res) {
+                    form$.reset();
+                    this.deviceUsingList();
+                }
+            }).finally(() => {
                 form$.submitting = false;
-                form$.reset();
-                this.deviceUsingList();
             });
-
         },
         //dialog
         confirmCancelUsingDevice(device) {
@@ -210,8 +240,7 @@ export default {
             this.device = device;
             this.doneUsingDeviceDialog = true;
         },
-        confirmReportDeviceStatus(device)
-        {
+        confirmReportDeviceStatus(device) {
             this.device = device;
             this.reportDeviceStatusDialog = true;
         },
@@ -235,7 +264,7 @@ export default {
             const data = form$.data;
             data.id = this.device.id;
             form$.submitting = true;
-            await axiosWrapper.post(API_PATH.DEVICE.REPORT_STATUS,data).finally(() => {
+            await axiosWrapper.post(API_PATH.DEVICE.REPORT_STATUS, data).finally(() => {
                 form$.submitting = false;
                 this.deviceUsingList();
             });
@@ -243,15 +272,35 @@ export default {
         revalidate() {
             this.$refs.form$.resetValidators();
         },
+        async getAllUser() {
+            this.userList = await axiosWrapper.get(API_PATH.USER.LIST_MASTER);
+        },
+        setDefaultSpeed(val) {
+            if (val)
+                this.$refs.form$.update({
+                    centrifugeSpeed: 10000,
+                });
+            else
+                this.$refs.form$.update({
+                    centrifugeSpeed: '',
+                });
+        }
     },
     mounted() {
         this.getDeviceList();
         this.deviceUsingList();
+        this.getAllUser();
     }
 }
 </script>
 <style>
 .btn-import {
     margin-bottom: 50px;
+}
+
+.report-btn {
+    background-color: #ffc107 !important;
+    border-color: #ffc107 !important;
+    color: white !important;
 }
 </style>

@@ -59,13 +59,13 @@ async function handleResponse(response) {
     if ([201].includes(response.status)) {
         toast.success(data.message, {
             position: toast.POSITION.TOP_CENTER,
-            autoClose: data.message.length*150
+            autoClose: data.message?.length*150
         });
     } else {
         if (data.message) {
             toast.info(data.message, {
                 position: toast.POSITION.TOP_CENTER,
-                autoClose: data.message.length*150
+                autoClose: data.message?.length*150
             });
         }
     }
@@ -76,7 +76,7 @@ function handleResponseError(error) {
     console.log(error.response.data.errorMessage)
     toast.error(error.response.data.errorMessage, {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: error.response.data.errorMessage.length*150
+        autoClose: error?.response?.data?.errorMessage?.length*150
     });
     const { user, logout } = useAuthStore();
     // console.log(user)
