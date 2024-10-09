@@ -25,7 +25,6 @@
 <script>
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
-import { useAuthStore } from '@/stores/auth';
 
 export default {
     components: {
@@ -44,10 +43,6 @@ export default {
         };
     },
     methods: {
-        hasPermission(role) {
-            const user = useAuthStore().user;
-            return user && user?.data?.userDto?.role === role;
-        },
     },
 }
 </script>

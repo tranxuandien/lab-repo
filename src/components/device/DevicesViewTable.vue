@@ -9,7 +9,7 @@
                 <Column field="position" header="Vị trí" style="width: 10%"></Column>
                 <Column field="user" header="Người đăng ký" style="width: 10%"></Column>
                 <Column field="otherInfo" header="Thông tin khác" style="width: 10%"></Column>
-                <Column v-if="hasPermission('ROLE_ADMIN')" :exportable="false" style="min-width: 12rem;width: 5%;"
+                <Column v-if="hasPermission()" :exportable="false" style="min-width: 12rem;width: 5%;"
                     header="Cập nhật">
                     <template #body="slotProps">
                         <Button v-if="!slotProps.data.deviceStatus" icon="pi pi-pencil" outlined rounded class="mr-2"
@@ -72,9 +72,9 @@ export default {
         };
     },
     methods: {
-        hasPermission(role) {
-            const user = useAuthStore().user;
-            return user && user?.data?.userDto?.role === role;
+        hasPermission() {
+            const {hasRoleBuddy} = useAuthStore();
+            return hasRoleBuddy();
         },
         confirmDeleteDevice(device) {
             console.log(device)

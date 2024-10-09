@@ -6,7 +6,7 @@
                 paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
                 currentPageReportTemplate="{first} to {last} of {totalRecords}">
                 <Column field="name" header="Tên nơi sản xuất" style="min-width: 12rem;width: 80%;"></Column>
-                <Column v-if="hasPermission('ROLE_ADMIN')" :exportable="false" style="min-width: 12rem;width: 20%;"
+                <Column v-if="hasPermission()" :exportable="false" style="min-width: 12rem;width: 20%;"
                     header="Cập nhật">
                     <template #body="slotProps">
                         <!-- <Button icon="pi pi-pencil" outlined rounded class="mr-2" @click="editBrand(slotProps.data)"></Button> -->
@@ -57,9 +57,9 @@ export default {
         };
     },
     methods: {
-        hasPermission(role) {
-            const user = useAuthStore().user;
-            return user && user?.data?.userDto?.role === role;
+        hasPermission() {
+            const {hasRoleBuddy} = useAuthStore();
+            return hasRoleBuddy();
         },
         confirmDeleteBrand(brand) {
             console.log(brand)

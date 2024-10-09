@@ -17,7 +17,7 @@
                 <!-- <Column field="expiredDate" header="Hạn dụng" style="width: 10%"></Column> -->
                 <!-- <Column field="impExpInfo" header="Tình trạng hóa chất" style="width: 10%"></Column> -->
                 <Column field="otherInfo" header="Khác" style="width: 10%"></Column>
-                <Column v-if="hasPermission('ROLE_ADMIN')" :exportable="false" style="min-width: 12rem;width: 5%;"
+                <Column v-if="hasPermission()" :exportable="false" style="min-width: 12rem;width: 5%;"
                     header="Cập nhật">
                     <template #body="slotProps">
                         <Button icon="pi pi-pencil" outlined rounded class="mr-2" @click="editChemical(slotProps.data)"></Button>
@@ -69,9 +69,9 @@ export default {
         };
     },
     methods: {
-        hasPermission(role) {
-            const user = useAuthStore().user;
-            return user && user?.data?.userDto?.role === role;
+        hasPermission() {
+            const {hasRoleBuddy} = useAuthStore();
+            return hasRoleBuddy();
         },
         confirmDeleteChemical(chemical) {
             console.log(chemical)

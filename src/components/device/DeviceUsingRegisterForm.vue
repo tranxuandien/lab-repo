@@ -71,7 +71,7 @@
                             #body="slotProps">
                             {{ slotProps.data.end.replaceAll('-', '/').replaceAll('T', ' ') }}
                         </template></Column>
-                    <Column sortable field="user" header="Người đăng ký sử dụng" style="width: 5%"></Column>
+                    <Column sortable field="users" header="Người đăng ký sử dụng" style="width: 5%"></Column>
                     <Column sortable field="registerStatus" header="Trạng thái đăng ký" style="width: 5%"></Column>
                     <!-- <Column sortable  :exportable="false" style="min-width: 12rem;width: 5%;" header="Cập nhật">
                         <template #body="slotProps">
@@ -107,7 +107,7 @@
                     <Column sortable field="registerStatus" header="Trạng thái đăng ký" style="width: 5%"></Column>
                     <Column sortable field="centrifugeSpeed" header="Tốc độ ly tâm" style="width: 5%"></Column>
                     <Column sortable field="expect" header="Mục đích sử dụng" style="width: 5%"></Column>
-                    <Column sortable field="user" header="Người đăng ký chính" style="width: 5%"></Column>
+                    <Column sortable field="buddy" header="Người hướng dẫn" style="width: 5%"></Column>
                     <Column sortable field="users" header="Người sử dụng" style="width: 5%"></Column>
                     <Column sortable :exportable="false" style="min-width: 12rem;width: 5%;" header="Cập nhật">
                         <template #body="slotProps">

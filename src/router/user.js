@@ -1,19 +1,11 @@
 import Layout from '@/views/user/Layout.vue';
-import ChemicalPage from '@/views/user/chemical/ChemicalPage.vue'
-import ChemicalRegisterPage from '@/views/user/chemical/ChemicalRegisterPage.vue'
-import ChemicalImportRegisterPage from '@/views/user/chemical/ChemicalImportRegisterPage.vue'
-import ChemicalBarCodePrintPage from '@/views/user/chemical/ChemicalBarCodePrintPage.vue'
-import ChemicalUsingRegisterPage from '@/views/user/chemical/ChemicalUsingRegisterPage.vue'
-import ChemicalManagerPage from '@/views/user/chemical/ChemicalManagerPage.vue'
-import ChemicalUsingHistoryPage from '@/views/user/chemical/ChemicalUsingHistoryPage.vue'
-import ChemicalUpdatePage from '@/views/user/chemical/ChemicalUpdatePage.vue'
 import BrandRegisterPage from '@/views/user/brand/BrandRegisterPage.vue'
 import PositionRegisterPage from '@/views/user/position/PositionRegisterPage.vue'
-import DevicePage from '@/views/user/device/DevicePage.vue'
-import DeviceRegisterPage from '@/views/user/device/DeviceRegisterPage.vue'
-import DeviceUsingRegisterPage from '@/views/user/device/DeviceUsingRegisterPage.vue';
 import { useAuthStore } from '@/stores/auth';
-
+import chemical from './chemical';
+import device from './device';
+import UserPage from '@/views/user/usermanage/UserPage.vue';
+import BuddyRegisterPage from '@/views/user/usermanage/BuddyRegisterPage.vue';
 export default {
     path: '/user',
     component: Layout,
@@ -24,45 +16,17 @@ export default {
     },
     children: [
         {
-            path: 'chemical',
-            name: 'chemical',
-            component: ChemicalPage
+            path: '',
+            name: 'UserPage',
+            component: UserPage
         },
         {
-            path: 'chemical/register',
-            name: 'chemicalRegister',
-            component: ChemicalRegisterPage
+            path: 'buddy/register',
+            name: 'BuddyRegisterPage',
+            component: BuddyRegisterPage
         },
-        {
-            path: 'chemical/update/:id',
-            name: 'chemicalUpdate',
-            component: ChemicalUpdatePage
-        },
-        {
-            path: 'chemical/import/register',
-            name: 'chemicalImportRegister',
-            component: ChemicalImportRegisterPage
-        },
-        {
-            path: 'chemical/barcode/print',
-            name: 'chemicalBarCodePrintPage',
-            component: ChemicalBarCodePrintPage
-        },
-        {
-            path: 'chemical/using/register',
-            name: 'chemicalUsingRegisterPage',
-            component: ChemicalUsingRegisterPage
-        },
-        {
-            path: 'chemical/manager',
-            name: 'chemicalManagerPage',
-            component: ChemicalManagerPage
-        },
-        {
-            path: 'chemical/using/history',
-            name: 'chemicalUsingHistoryPage',
-            component: ChemicalUsingHistoryPage
-        },
+        { ...chemical },
+        { ...device },
         {
             path: 'brand',
             children: [
@@ -82,21 +46,6 @@ export default {
                     component: PositionRegisterPage
                 },
             ]
-        },
-        {
-            path: 'device',
-            name: 'device',
-            component: DevicePage
-        }, 
-        {
-            path: 'device/register',
-            name: 'deviceRegister',
-            component: DeviceRegisterPage
-        },
-        {
-            path: 'device/using/register',
-            name: 'deviceUsingRegister',
-            component: DeviceUsingRegisterPage
         },
     ]
 }

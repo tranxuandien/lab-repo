@@ -14,7 +14,7 @@
                     placeholder="Phân loại hóa chất" />
                 <SelectElement :search="true" name="position" label-prop="positionInfo" value-prop="id"
                     :items="positionLst" placeholder="Vị trí đặt hóa chất" :columns="2" />
-                <UserSelectBox v-if="hasPermission('ROLE_ADMIN')" />
+                <UserSelectBox v-if="hasPermission()" />
             </GroupElement>
             <ButtonElement name="submit" add-class="md-2 btn-search" submits>
                 Tìm kiếm
@@ -67,9 +67,9 @@ export default {
             })
             this.$emit('getData', tableResult.data, chartResult.data);
         },
-        hasPermission(role) {
-            const user = useAuthStore().user;
-            return user && user?.data?.userDto?.role === role;
+        hasPermission() {
+            const {hasRoleBuddy} = useAuthStore();
+            return hasRoleBuddy();
         },
     },
     mounted() {

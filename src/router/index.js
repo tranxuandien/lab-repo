@@ -41,17 +41,6 @@ const Router = createRouter({
         }
       ]
     },
-    // {
-    //   path: '/devices',
-    //   name: 'devices',
-    //   component: DevicePage
-    // },
-    // {
-    //   path: '/checkin',
-    //   name: 'checkin',
-    //   component: CheckInPage
-    // },
-
     {
       path: "/:pathMatch(.*)*",
       name: 'PageNotFound',

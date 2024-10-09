@@ -21,7 +21,7 @@
                 </Column>
                 <Column field="chemicalStatus" header="Khác" style="width: 10%"></Column>
                 <Column field="purchaseSrc" header="Khác" style="width: 10%"></Column>
-                <Column v-if="hasPermission('ROLE_ADMIN')" :exportable="false" style="min-width: 12rem;width: 5%;"
+                <Column v-if="hasPermission()" :exportable="false" style="min-width: 12rem;width: 5%;"
                     header="Xóa/In lại tem">
                     <template #body="slotProps">
                         <!-- <Button icon="pi pi-pencil" outlined rounded class="mr-2" @click="editProduct(slotProps.data)" /> -->
@@ -75,9 +75,9 @@ export default {
         };
     },
     methods: {
-        hasPermission(role) {
-            const user = useAuthStore().user;
-            return user && user?.data?.userDto?.role === role;
+        hasPermission() {
+            const {hasRoleBuddy} = useAuthStore();
+            return hasRoleBuddy();
         },
         confirmDeleteChemical(chemical) {
             this.chemical = chemical;

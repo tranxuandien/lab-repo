@@ -40,8 +40,8 @@ export default {
     },
     methods: {
         showSideNav() {
-            const { hasRoleAdmin, isLogIn } = useAuthStore();
-            if (isLogIn()) {
+            const { hasRoleAdmin,hasRoleBuddy, isLogIn } = useAuthStore();
+            if (isLogIn()&& !hasRoleAdmin()) {
                 this.nodes.push(
                     {
                         key: '1',
@@ -69,7 +69,7 @@ export default {
                 );
             }
 
-            if (hasRoleAdmin() && isLogIn()) {
+            if (hasRoleBuddy() && isLogIn()) {
                 this.nodes[1].children.push(
                     { key: '1-1',icon:"pi pi-address-book", label: 'Đăng kí hóa chất', data: '/user/chemical/register', type: 'url' },
                     { key: '1-2',icon:"pi pi-print", label: 'In tem hóa chất', data: '/user/chemical/barcode/print', type: 'url' },
@@ -94,6 +94,19 @@ export default {
                         // type: 'url',
                         children: [
                             { key: '1-0',icon:"pi pi-bars",label: 'Đăng kí vị trí đặt HC', data: '/user/position/register', type: 'url' },
+                        ]
+                    },
+                );
+            }
+            if(hasRoleAdmin())
+            {
+                this.nodes.push(
+                    {
+                        key: '6',
+                        label: 'Quản lý người dùng',
+                        children: [
+                            { key: '6-0',icon:"pi pi-user", label: 'Danh sách người dùng', data: '/user', type: 'url' },
+                            { key: '6-1',icon:"pi pi-users", label: 'Đăng ký người hướng dẫn', data: '/user/buddy/register', type: 'url' },
                         ]
                     },
                 );

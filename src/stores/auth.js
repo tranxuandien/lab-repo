@@ -41,6 +41,9 @@ export const useAuthStore = defineStore({
         hasRoleAdmin() {
             return this.user && this.user.data.userDto.role == 'ROLE_ADMIN';
         },
+        hasRoleBuddy() {
+            return this.user && this.user.data.userDto.role == 'ROLE_BUDDY';
+        },
         isLogIn() {
             if(!this.user) return false; 
             const compareDate = new Date(this.user.data.saveTime+this.user.data.timeAlive)
