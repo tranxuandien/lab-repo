@@ -2,9 +2,9 @@
     <Vueform :endpoint="false" @submit="submitForm" name="registerForm">
         <GroupElement name="buddyInformation">
             <SelectElement :search="true" name="buddy" :items="buddyList"
-                placeholder="Người hướng dẫn" :columns="2" />
+                placeholder="Người hướng dẫn" :columns="2" rules="required" :messages="{required:'Chọn người hướng dẫn'}"/>
             <MultiselectElement :native="false" :search="true" name="users" :items="userList"
-                placeholder="Sinh viên" :columns="2" />
+                placeholder="Sinh viên" :columns="2" rules="required" :messages="{required:'Chọn danh sách sinh viên'}" />
         </GroupElement>
         <ButtonElement name="submit" add-class="mt-2" submits>
             Đăng kí người hướng dẫn

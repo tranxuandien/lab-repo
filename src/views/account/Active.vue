@@ -14,7 +14,7 @@ export default {
             await axiosWrapper.get(API_PATH.ACCOUNT.USER_ACTIVE + token).then(() => {
                 setTimeout(() => {
                     Router.push("/auth/login");
-                }, 3000);
+                }, 6000);
             })
         }
     },

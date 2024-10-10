@@ -5,11 +5,11 @@
                 tableStyle="min-width: 50rem"
                 paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
                 currentPageReportTemplate="{first} to {last} of {totalRecords}">
-                <Column field="name" header="Tên thiết bị" style="width: 20%"></Column>
-                <Column field="position" header="Vị trí" style="width: 10%"></Column>
-                <Column field="user" header="Người đăng ký" style="width: 10%"></Column>
-                <Column field="otherInfo" header="Thông tin khác" style="width: 10%"></Column>
-                <Column v-if="hasPermission()" :exportable="false" style="min-width: 12rem;width: 5%;"
+                <Column sortable field="name" header="Tên thiết bị" style="width: 20%"></Column>
+                <Column sortable field="position" header="Vị trí" style="width: 10%"></Column>
+                <Column sortable field="user" header="Người đăng ký" style="width: 10%"></Column>
+                <Column sortable field="otherInfo" header="Thông tin khác" style="width: 10%"></Column>
+                <Column sortable v-if="hasPermission()" :exportable="false" style="min-width: 12rem;width: 5%;"
                     header="Cập nhật">
                     <template #body="slotProps">
                         <Button v-if="!slotProps.data.deviceStatus" icon="pi pi-pencil" outlined rounded class="mr-2"

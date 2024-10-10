@@ -14,7 +14,7 @@
             }" field-name="userName" :rules="[
                 'required',
                 'max:255',
-            ]" />
+            ]" :messages="{ required: 'Điền tên đăng nhập', max: 'Tên đăng nhập tối đa 255 ký tự' }" />
             <TextElement name="password" input-type="password" :rules="[
                 'required',
                 'min:8',
@@ -22,23 +22,18 @@
                 container: 12,
                 label: 12,
                 wrapper: 12,
-            }" />
+            }" :messages="{ required: 'Điền mật khẩu', min: 'Mật khẩu ít nhất 8 ký tự' }" />
         </GroupElement>
         <StaticElement name="divider_1" tag="hr" />
         <ButtonElement name="login" :submits="true" button-label="Đăng nhập" :full="true" size="md" :columns="3" />
-        <ButtonElement name="register" button-label="Đăng ký" size="md" :columns="2" button-type="anchor" href="/account/register"/>
+        <ButtonElement name="register" button-label="Đăng ký" size="md" :columns="2" button-type="anchor"
+            href="/account/register" />
     </Vueform>
 </template>
 
 <script>
-// import { API_PATH } from '@/router/apiPath';
-// import Router from '@/router';
-// import { toast } from 'vue3-toastify';
 import Router from '@/router';
 import { useAuthStore } from '@/stores/auth'
-
-
-
 export default {
     data() {
         return {

@@ -5,8 +5,8 @@
                 tableStyle="min-width: 50rem"
                 paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
                 currentPageReportTemplate="{first} to {last} of {totalRecords}">
-                <Column field="name" header="Tên nơi sản xuất" style="min-width: 12rem;width: 80%;"></Column>
-                <Column v-if="hasPermission()" :exportable="false" style="min-width: 12rem;width: 20%;"
+                <Column sortable field="name" header="Tên nơi sản xuất" style="min-width: 12rem;width: 80%;"></Column>
+                <Column sortable v-if="hasPermission()" :exportable="false" style="min-width: 12rem;width: 20%;"
                     header="Cập nhật">
                     <template #body="slotProps">
                         <!-- <Button icon="pi pi-pencil" outlined rounded class="mr-2" @click="editBrand(slotProps.data)"></Button> -->

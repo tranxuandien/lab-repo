@@ -30,6 +30,8 @@ export const API_PATH = {
         BUDDY_REGISTER: "api/v1/admin/buddy/register",
         BUDDY_LIST: "api/v1/admin/buddy/list",
         STUDENT_LIST: "api/v1/admin/student/list",
+        ACTIVE: "api/v1/admin/user/active?id=",
+        DELETE: "api/v1/admin/user/delete/",
     },
     ACCOUNT: {
         USER_REGISTER: "api/auth/register",
