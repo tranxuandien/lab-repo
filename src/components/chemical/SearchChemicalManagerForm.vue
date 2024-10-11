@@ -15,7 +15,7 @@
                 <SelectElement :search="true" name="position" label-prop="positionInfo" value-prop="id"
                     :items="positionLst" placeholder="Vị trí đặt hóa chất" :columns="2" />
                 <SelectElement :search="true" name="impExpType" :native="false"
-                    :items="['Mới', 'Sắp hết', 'Hết']" :columns="2" placeholder="Trạng thái hóa chất" />
+                    :items="['Mới', 'Sắp Hết', 'Hết']" :columns="2" placeholder="Trạng thái hóa chất" />
             </GroupElement>
             <ButtonElement name="submit" add-class="md-2 btn-search" submits>
                 Tìm kiếm
