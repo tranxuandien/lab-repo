@@ -39,6 +39,20 @@
                 default="Dung dịch" />
             <SelectElement :search="true" name="chemicalTypeInfo" :native="false" :items="['Lọ', 'Gói']" :columns="2"
                 placeholder="Đóng gói" rules="required" :messages="{ required: 'Chọn cách đóng gói' }" default="Lọ" />
+            <TextElement id="alertQuantity" name="alertQuantity" placeholder="Ngưỡng k/lượng,Thể tích gửi thông báo"
+                :columns="3" rules="required" :messages="{ required: 'Nhập ngưỡng k/lượng,thể tích gửi thông báo' }"
+                :mask="{
+                    mask: 'number',
+                    thousandsSeparator: '',     // any single char
+                    scale: 2,                   // digits after fractional delimiter, 0 for integers
+                    padFractionalZeros: false,  // pads zeros at end to the length of scale
+                    normalizeZeros: true,       // removes zeros at ends (eg. 1,10 -> 1,1)
+                    radix: '.',                 // fractional delimiter
+                    mapToRadix: ['.'],          // symbols to process as radix
+                    min: 0,                // minimum allowed value
+                    max: 10000,                 // maximum allowed value
+                    autofix: true,              // replace with min/max value if outside of range
+                }" />(g/ml)
         </GroupElement>
         <GroupElement>
             <ButtonElement name="submit" add-class="mt-2" submits :columns="2" :full="true" size="md">
@@ -98,7 +112,8 @@ export default {
             otherInfo: this.item.otherInfo,
             brand: this.item.brand,
             id: this.item.id,
-            registerUser: "user"//optional
+            registerUser: "user",//optional
+            alertQuantity:this.item.alertQuantity,
         })
     }
 }

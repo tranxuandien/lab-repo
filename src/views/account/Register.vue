@@ -1,5 +1,5 @@
 <template>
-    <Vueform @submit="registerUser" size="md" :display-errors="false">
+    <Vueform :endpoint="false" @submit="registerUser" size="md" :display-errors="false">
         <StaticElement name="register_title" content="Tạo tài khoản" tag="h1" />
         <StaticElement name="divider" tag="hr" />
         <GroupElement name="container">

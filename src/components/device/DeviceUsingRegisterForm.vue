@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>
-            <Vueform ref="form$" @submit="deviceUsing" @change="revalidate">
+            <Vueform :endpoint="false" ref="form$" @submit="deviceUsing" @change="revalidate">
                 <GroupElement name="gr1">
                     <SelectElement :search="true" name="deviceId" label-prop="name" value-prop="id" :items="deviceList"
                         placeholder="Chọn thiết bị" :columns="2" :native="true" rules="required"
@@ -152,7 +152,7 @@
                     <span class="text-surface-500 dark:text-surface-400 block mb-8">Điển thông tin tình trạng thiết bị
                         trong quá
                         trình sử dụng.</span>
-                    <Vueform ref="form1$" @submit="reportDeviceStatus">
+                    <Vueform :endpoint="false" ref="form1$" @submit="reportDeviceStatus">
                         <GroupElement name="gr2">
                             <TextElement name="deviceStatusDetail" :native="false" :columns="12"
                                 placeholder="Trạng thái bất thường của thiết bị" rules="required"

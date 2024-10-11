@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>
-            <Vueform ref="form$" @submit="chemicalUsing">
+            <Vueform :endpoint="false" ref="form$" @submit="chemicalUsing">
                 <GroupElement name="scanCode">
                     <TextElement id="barcode" name="barcode" placeholder="Mã hóa chất" :columns="3" @change="getInfo"
                         rules="required" :messages="{ required: 'Nhập mã hóa chất' }">

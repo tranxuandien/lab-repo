@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <Vueform ref="form$" @submit="chemicalImport">
+      <Vueform :endpoint="false" ref="form$" @submit="chemicalImport">
         <GroupElement name="scanCode" label="Mã barcode hóa chất">
           <TextElement id="barcode" name="barcode" placeholder="Mã hóa chất" :columns="6" @change="getInfo"
             rules="required" :messages="{ required: 'Nhập mã barcode hóa chất' }">
@@ -20,7 +20,7 @@
               min: 0,                // minimum allowed value
               max: 10000,                 // maximum allowed value
               autofix: true,              // replace with min/max value if outside of range
-            }" />
+            }" />(g/ml)
           <DateElement name="expiredDate" :columns="1" placeholder="Hạn sử dụng" rules="required"
             :messages="{ required: 'Chọn hạn sử dụng' }" />
         </GroupElement>

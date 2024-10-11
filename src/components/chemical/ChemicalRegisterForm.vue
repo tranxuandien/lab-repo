@@ -7,31 +7,11 @@
                 :items="brandList" placeholder="Nơi sản xuất" :columns="3" rules="required"
                 :messages="{ required: 'Chọn nơi sản xuất' }" />
         </GroupElement>
-        <!-- <GroupElement name="chemicalDescription" label="Mô tả hóa chất"> -->
-
-        <!-- <TextElement name="manufactoryQuantity" placeholder="K/lượng,Thể tích" :columns="2" rules="required" :messages="{ required: 'Nhập lượng hóa chất' }" :mask="{
-                    mask: 'number',
-                    thousandsSeparator: '',     // any single char
-                    scale: 2,                   // digits after fractional delimiter, 0 for integers
-                    padFractionalZeros: false,  // pads zeros at end to the length of scale
-                    normalizeZeros: true,       // removes zeros at ends (eg. 1,10 -> 1,1)
-                    radix: '.',                 // fractional delimiter
-                    mapToRadix: ['.'],          // symbols to process as radix
-                    min: 0,                // minimum allowed value
-                    max: 10000,                 // maximum allowed value
-                    autofix: true,              // replace with min/max value if outside of range
-                }" /> -->
-
-
-        <!-- <DateElement name="expiredDate" :columns="1" placeholder="Hạn sử dụng" rules="required"
-                :messages="{ required: 'Chọn hạn sử dụng' }" /> -->
-        <!-- </GroupElement> -->
         <GroupElement name="chemicalClassGroup" label="Phân loại hóa chất">
             <SelectElement :search="true" name="chemicalClass" :native="false"
                 :items="['Sinh học phân tử', 'Hóa chất vi sinh', 'Dung môi']" :columns="2"
                 placeholder="Phân loại hóa chất" default="Sinh học phân tử" rules="required"
                 :messages="{ required: 'Chọn phân loại hóa chất' }" />
-
             <SelectElement :search="true" name="chemicalClassInfo" :native="false" :items="['Vô cơ', 'Hữu cơ']"
                 :columns="2" placeholder="Loại HC vi sinh" :conditions="[
                     [
@@ -50,20 +30,26 @@
                 ]" rules="required" :messages="{ required: 'Chọn mô tả phân loại hóa chất' }" />
             <TextElement name="otherInfo" :native="false" :columns="2" placeholder="Mô tả khác" />
         </GroupElement>
-        <!-- <GroupElement name="ImportUser" label="Người nhập hóa chất"> -->
         <TextElement name="registerUser" :columns="2" hidden="true" />
-        <!-- </GroupElement> -->
         <GroupElement name="chemicalImportDescription" label="Thông tin nhập hóa chất">
-            <!-- <SelectElement :search="true" name="position" label-prop="positionInfo" value-prop="id" :items="positionLst"
-                placeholder="Vị trí đặt hóa chất" :columns="2" rules="required"
-                :messages="{ required: 'Chọn vị trí đặt hóa chất' }" />
-            <TextElement name="chemicalStatus" placeholder="Tình trạng hóa chất" :columns="2" />
-            <TextElement name="purchaseSrc" placeholder="Nguồn" :columns="2" /> -->
             <SelectElement :search="true" name="chemicalType" :native="false" :items="['Dung dịch', 'Bột']" :columns="2"
                 placeholder="Loại hóa chất" rules="required" :messages="{ required: 'Chọn loại hóa chất' }"
                 default="Dung dịch" />
             <SelectElement :search="true" name="chemicalTypeInfo" :native="false" :items="['Lọ', 'Gói']" :columns="2"
                 placeholder="Đóng gói" rules="required" :messages="{ required: 'Chọn cách đóng gói' }" default="Lọ" />
+            <TextElement id="alertQuantity" name="alertQuantity" placeholder="Ngưỡng k/lượng,Thể tích gửi thông báo" :columns="3"
+                rules="required" :messages="{ required: 'Nhập ngưỡng k/lượng,thể tích gửi thông báo' }" :mask="{
+                    mask: 'number',
+                    thousandsSeparator: '',     // any single char
+                    scale: 2,                   // digits after fractional delimiter, 0 for integers
+                    padFractionalZeros: false,  // pads zeros at end to the length of scale
+                    normalizeZeros: true,       // removes zeros at ends (eg. 1,10 -> 1,1)
+                    radix: '.',                 // fractional delimiter
+                    mapToRadix: ['.'],          // symbols to process as radix
+                    min: 0,                // minimum allowed value
+                    max: 10000,                 // maximum allowed value
+                    autofix: true,              // replace with min/max value if outside of range
+                }" />(g/ml)
         </GroupElement>
         <ButtonElement name="submit" add-class="mt-2" submits>
             Đăng kí hóa chất
