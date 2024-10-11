@@ -76,7 +76,7 @@ export default {
     },
     methods: {
         hasPermission() {
-            const {hasRoleBuddy} = useAuthStore();
+            const { hasRoleBuddy } = useAuthStore();
             return hasRoleBuddy();
         },
         confirmDeleteChemical(chemical) {
@@ -99,22 +99,19 @@ export default {
             }
         },
         statusSeverity(data) {
-            if (data.remain == 0) {
-                data.impExpInfo = 'Hết';
+            if (data.impExpInfo == 'Hết') {
                 return 'danger';
             }
-            else if (data.remain > 0 && data.remain <= 100) {
-                data.impExpInfo = "Sắp hết";
+            else if (data.impExpInfo == "Sắp Hết") {
                 return 'warn';
             }
             else {
-                data.impExpInfo = "Mới";
                 return 'success';
             }
         },
         async confirmRePrintChemicalBarCode(item) {
             console.log(item)
-            await axiosWrapper.get(API_PATH.CHEMICAL.RE_PRINT + '?chemicalName=' + item.originName + '&barcode=' + item.barcode, null, true,item.originName)
+            await axiosWrapper.get(API_PATH.CHEMICAL.RE_PRINT + '?chemicalName=' + item.originName + '&barcode=' + item.barcode, null, true, item.originName)
                 .finally(() => {
                 })
         }
