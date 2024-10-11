@@ -61,7 +61,7 @@
                     :rowsPerPageOptions="[5, 10, 20, 50]" tableStyle="min-width: 50rem"
                     paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
                     currentPageReportTemplate="{first} to {last} of {totalRecords}">
-                    <Column sortable field="device" header="Tên thiết bị" style="width: 20%"></Column>
+                    <Column sortable field="device" header="Tên thiết bị" style="width: 10%"></Column>
                     <Column sortable field="start" header="Thời gian bắt đầu sử dụng" style="width: 10%">
                         <template #body="slotProps">
                             {{ slotProps.data.start.replaceAll('-', '/').replaceAll('T', ' ') }}
@@ -71,7 +71,7 @@
                             #body="slotProps">
                             {{ slotProps.data.end.replaceAll('-', '/').replaceAll('T', ' ') }}
                         </template></Column>
-                    <Column sortable field="users" header="Người đăng ký sử dụng" style="width: 5%"></Column>
+                    <Column sortable field="registerUser" header="Người đăng ký sử dụng" style="width: 5%"></Column>
                     <Column sortable field="registerStatus" header="Trạng thái đăng ký" style="width: 5%"></Column>
                     <!-- <Column sortable  :exportable="false" style="min-width: 12rem;width: 5%;" header="Cập nhật">
                         <template #body="slotProps">
@@ -93,7 +93,7 @@
                     :rowsPerPageOptions="[5, 10, 20, 50]" tableStyle="min-width: 50rem"
                     paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
                     currentPageReportTemplate="{first} to {last} of {totalRecords}">
-                    <Column sortable field="device" header="Tên thiết bị" style="width: 20%"></Column>
+                    <Column sortable field="device" header="Tên thiết bị" style="width: 10%"></Column>
                     <Column sortable field="start" header="Thời gian bắt đầu sử dụng" style="width: 10%">
                         <template #body="slotProps">
                             {{ slotProps.data.start.replaceAll('-', '/').replaceAll('T', ' ') }}
@@ -109,6 +109,7 @@
                     <Column sortable field="expect" header="Mục đích sử dụng" style="width: 5%"></Column>
                     <Column sortable field="buddy" header="Người hướng dẫn" style="width: 5%"></Column>
                     <Column sortable field="users" header="Người sử dụng" style="width: 5%"></Column>
+                    <Column sortable field="registerUser" header="Người đăng ký sử dụng" style="width: 5%"></Column>
                     <Column sortable :exportable="false" style="min-width: 12rem;width: 5%;" header="Cập nhật">
                         <template #body="slotProps">
                             <Button v-if="slotProps.data.registerStatus === 'Đăng ký'" icon="pi pi-pencil" outlined
